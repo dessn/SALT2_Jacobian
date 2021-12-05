@@ -139,7 +139,7 @@ function main(parsed_args)
     trainopts, outdir = parse_input_file(input_file)
     @show outdir
     # DO BETTER THEN AUTO REMOVE
-    rm(outdir, force=true, recursive=true)
+    #rm(outdir, force=true, recursive=true)
     mkdir(outdir)
     cp(base_surface_path, joinpath(outdir, "TRAINOPT000.tar.gz"))
 
