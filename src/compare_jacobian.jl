@@ -3,6 +3,7 @@ using Statistics
 using ProgressBars
 include("./jacobian.jl")
 include("./surface.jl")
+include("./tools.jl")
 
 function parse_cli()
     s = ArgParseSettings()
@@ -84,12 +85,12 @@ function main(parsed_args)
     end
     println("Comparing $surface_1_path with $surface_2_path")
     s1, s2, cl = compare_surfaces(surface_1, surface_2, strict_compare)
-    s1n = [i[1] for i in s1]
-    s1v = [i[2] for i in s1]
-    s2n = [i[1] for i in s2]
-    s2v = [i[2] for i in s2]
-    cln = [i[1] for i in cl]
-    clv = [i[2] for i in cl]
+    s1n = [i[1] for i in ensure_list(s1)]
+    s1v = [i[2] for i in ensure_list(s1)]
+    s2n = [i[1] for i in ensure_list(s2)]
+    s2v = [i[2] for i in ensure_list(s2)]
+    cln = [i[1] for i in ensure_list(cl)]
+    clv = [i[2] for i in ensure_list(cl)]
     println("Median difference in spline 1 components: $(median(s1v))%")
     println("Median difference in spline 2 components: $(median(s2v))%")
     println("Median difference in colour law components: $(median(clv))%")
