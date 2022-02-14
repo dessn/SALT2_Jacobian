@@ -1,6 +1,11 @@
+module Surface
+
+# External Packages
 using FITSIO 
 using CodecZlib
-include("./tools.jl")
+
+# Internal packages
+using ..Tools
 
 struct colour_law
     a
@@ -95,4 +100,6 @@ function surface(name, trainopt, surface_path::AbstractString)
     raw_spline = [line for line in raw_spline if length(split(line))!=0]
     spl = spline(raw_spline)
     return surface(name, trainopt, c_law, c_law_err, spl)
+end
+
 end

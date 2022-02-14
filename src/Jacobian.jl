@@ -1,6 +1,10 @@
+module Jacobian
+
+# External packages
 using GZip
 using FITSIO 
-include("./surface.jl")
+
+using ..Surface
 
 struct jacobian
     names
@@ -75,3 +79,4 @@ function load_jacobian(fname=nothing)
     return jacobian(names, trainopts, splines_1, splines_2, colour_law)
 end
 
+end

@@ -1,15 +1,23 @@
+module Tools
+# Generic functions to be used throughout
+
+# External Packages
 using CodecZlib
 using Tar
 
-# Generic functions to be used throughout
+# Exports
+export uncompress
+export compress
+export ensure_list
 
 # Uncompress if source is compressed, otherwise just return source
 function uncompress(source)
     if occursin(".tar.gz", source)
-        open(source) do tar_gz
+        source = open(source) do tar_gz
             tar = GzipDecompressorStream(tar_gz)
-            source = readdir(Tar.extract(tar), join=true)[1]
+            s = readdir(Tar.extract(tar), join=true)[1]
             close(tar)
+            return s
         end
     end
     return source
@@ -25,9 +33,11 @@ function compress(source, dest)
 end
 
 # Ensure input is a list
-function ensure_list(in)
-    if typeof(in) <: Vector
-        return in
+function ensure_list(list)
+    if typeof(list) <: Vector
+        return list
     end
-    return [in]
+    return [list]
+end
+
 end

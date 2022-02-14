@@ -1,4 +1,4 @@
-name = "jacobian"
+name = "SALT2-Jacobian"
 uuid = "07866b32-ae05-46b5-8332-a4a212b699ed"
 authors = ["Patrick Armstrong <u6096820@anu.edu.au>"]
 version = "0.1.0"
