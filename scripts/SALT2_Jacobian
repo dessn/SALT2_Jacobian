@@ -27,10 +27,10 @@ function get_args()
             action = :store_true
         "--jacobian", "-j"
             help = "Path to pretrained jacobian matrix"
-            default = abspath(joinpath("@__DIR__", "../jacobian.tar.gz"))
+            default = abspath(joinpath("@__DIR__", "../src/jacobian.tar.gz"))
         "--base", "-b"
             help = "Path to base (unperturbed) surface)"
-            default = abspath(joinpath(@__DIR__, "../TRAINOPT000.tar.gz"))
+            default = abspath(joinpath(@__DIR__, "../src/TRAINOPT000.tar.gz"))
         "input"
             help = "Path to either .toml or .input file. If .toml then all other inputs except for -v are ignored"
             required = true
