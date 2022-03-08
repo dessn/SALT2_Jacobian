@@ -1,0 +1,8 @@
+# Optional, define paths 
+[ global ]
+base_path = "../../" # Move base up to Examples
+output_path = "Outputs/CreateJacobian"
+logging = true
+
+[ jacobian ]
+trained_surfaces = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite"

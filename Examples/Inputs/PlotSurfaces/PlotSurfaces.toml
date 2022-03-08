@@ -1,0 +1,20 @@
+[ global ]
+base_path = "../../"
+data_path = "./" # This time we are setting data_path to be equal to base_path
+output_path = "Outputs/PlotSufaces"
+logging = true
+
+[ plot ]
+plot_path = "Outputs/T21Suite" # If you trained some new surfaces, then plot_path will automatically be set to output_path so you can plot those surfaces. Otherwise, plot_path can be either absolute or relative to data_path
+
+# Optionally, you can choose specific surfaces to plot. If this isn't set, all TRAINOPTS will be plot together
+plot_surfaces = ["TRAINOPT043.tar.gz", "TRAINOPT044.tar.gz"]
+
+plot_name = "Comparison.svg" # Defaults to Comparison.svg
+
+# Optionally, you can specific a second set of trainopts and have them plotted as well. If this is specified, then a second plot showing the residual between TRAINOPTS in plot_path and comparison_plot_path will be created
+comparison_plot_path = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite/"
+comparison_plot_surfaces = ["TRAINOPT043.tar.gz", "TRAINOPT044.tar.gz"]
+comparison_plot_name = "Residual.svg"
+strict_compare = true # If true, compare TRAINOPTS 1 to 1 (i.e TRAINOPT000 vs TRAINOPT000, TRAINOPT001 vs TRAINOPT001, etc...) otherwise compare all to all (i.e TRAINOPT000 vs TRAINOPT000, TRAINOPT000 vs TRAINOPT001, etc...)
+

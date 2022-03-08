@@ -1,0 +1,4 @@
+Main.SALT2_Jacobian | [Info] Logging to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/CreateJacobian/log.txt
+Main.SALT2_Jacobian | [Info] Generating Jacobian
+Main.SALT2_Jacobian | [Info] Training jacobian from TrainedSurfaces/OUTPUT_TRAIN_T21_suite
+Main.SALT2_Jacobian | [Info] Saving to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/CreateJacobian/jacobian.tar.gz

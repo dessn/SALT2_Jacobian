@@ -1,0 +1,11 @@
+[ global ]
+base_path = "../../"
+output_path = "Outputs/T21Suite"
+logging = true
+
+[ jacobian ]
+path = "Outputs/CreateJacobian/jacobian.tar.gz" # Can be absolute or relative to base_path
+
+[ surfaces ]
+input_file = "Inputs/TrainSurfaces/T21Suite.input" # submit_batch input file which the jacobian matrix will approximate
+base_surface = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite/TRAINOPT000.tar.gz" # Base / unperturbed surface. Can be absolute or relative to base_path

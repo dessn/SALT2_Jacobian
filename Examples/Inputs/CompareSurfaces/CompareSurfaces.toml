@@ -1,0 +1,20 @@
+[ global ]
+base_path = "../../"
+output_path = "Outputs/CompareSufaces"
+logging = true
+
+[ compare ]
+comparison_path = "Outputs/T21Suite" # Directory containing TRAINOPTS for comparison. Can be absolute or relative to data_path
+comparison_name = "Jacobian Trained Surfaces" # Description of what these surfaces represent
+
+# Optionally you can specify a specific surface to compare. If this isn't set, then all TRAINOPTS will be considered for coparison. This can be either a single trainopt file, or a list of trainopt files
+#comparison_surfaces = ["TRAINOPT043.tar.gz", "TRAINOPT044.tar.gz"]
+
+# If you have trained some new surfaces, then comparison_path_2 is automatically set to output_path, so you can compare your new surfaces to those in comparison_path
+comparison_path_2 = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite/"
+comparison_name_2 = "SALT2 Trained Surfaces" # If comparison_path_2 is not specified, this defaults to "Jacobian Trained Surfaces"
+#comparison_surfaces_2 = ["TRAINOPT043.tar.gz", "TRAINOPT044.tar.gz"]
+
+strict_compare = true # If true, compare TRAINOPTS 1 to 1 (i.e TRAINOPT000 vs TRAINOPT000, TRAINOPT001 vs TRAINOPT001, etc...) otherwise compare all to all (i.e TRAINOPT000 vs TRAINOPT000, TRAINOPT000 vs TRAINOPT001, etc...)
+
+summary = true # Whether to show the median of the spline and colour law differences, or the difference in each individual part of the spline and colour law. Most of the time this should be true

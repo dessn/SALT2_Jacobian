@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#=
+JULIA="${JULIA:-julia}"
+JULIA_CMD="${JULIA_CMD:-$JULIA --color=yes --startup-file=no}"
+# below gets the directory name of the script, even if there is a symlink involved
+# from https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+export JULIA_PROJECT=$DIR/.. # $DIR is the scripts directory, so we go up a level to get to the base project directory
+export JULIA_LOAD_PATH=@:@stdlib  # exclude default environment
+exec $JULIA_CMD -e 'include(popfirst!(ARGS))' "$SOURCE" "$@"
+=#
+
+# First get args so that we can crash ASAP
+using ArgParse
+
+function get_args()
+    s = ArgParseSettings()
+    @add_arg_table s begin
+        "--verbose", "-v"
+            help = "Increase level of logging verbosity"
+            action = :store_true
+        "--jacobian", "-j"
+            help = "Path to pretrained jacobian matrix"
+            default = abspath(joinpath("@__DIR__", "../jacobian.tar.gz"))
+        "--base", "-b"
+            help = "Path to base (unperturbed) surface)"
+            default = abspath(joinpath(@__DIR__, "../TRAINOPT000.tar.gz"))
+        "input"
+            help = "Path to either .toml or .input file. If .toml then all other inputs except for -v are ignored"
+            required = true
+    end
+
+    return parse_args(s)
+end
+args = get_args()
+
+# Assuming args worked, do eveything else
+using TOML
+
+include("../src/SALT2_Jacobian.jl")
+using .SALT2_Jacobian
+
+# Run script
+verbose = args["verbose"]
+input_path = abspath(args["input"])
+if splitext(input_path) == ".toml"
+    toml = input_path
+else
+    jacobian_path = args["jacobian"]
+    base_surface = args["base"]
+    output_path = open(input_path, "r") do io
+        lines = readlines(io)
+        out_line = lines[findfirst(x -> occursin("OUTDIR:", x), lines)]
+        return split(out_line)[end]
+    end
+    global_dict = Dict("base_path" => "./", "output_path" => output_path, "logging" => true)
+    jacobian = Dict("path" => jacobian_path)
+    surfaces = Dict("input_file" => input_path, "base_surface" => base_surface)
+    toml = Dict("toml_path" => input_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
+end
+process_jacobian(toml, verbose)
