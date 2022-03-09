@@ -31,6 +31,9 @@ function get_args()
         "--base", "-b"
             help = "Path to base (unperturbed) surface)"
             default = abspath(joinpath(@__DIR__, "../src/TRAINOPT000.tar.gz"))
+        "--setup", "-s"
+            help = "Setup / instantiate packages"
+            action = :store_true
         "input"
             help = "Path to either .toml or .input file. If .toml then all other inputs except for -v are ignored"
             required = true
@@ -42,6 +45,11 @@ args = get_args()
 
 # Assuming args worked, do eveything else
 using TOML
+using Pkg
+
+if args["setup"]
+    Pkg.instantiate()
+end
 
 include("../src/SALT2_Jacobian.jl")
 using .SALT2_Jacobian
@@ -49,7 +57,7 @@ using .SALT2_Jacobian
 # Run script
 verbose = args["verbose"]
 input_path = abspath(args["input"])
-if splitext(input_path) == ".toml"
+if splitext(input_path)[end] == ".toml"
     toml = input_path
 else
     jacobian_path = args["jacobian"]
