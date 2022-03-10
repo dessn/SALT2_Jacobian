@@ -47,7 +47,7 @@ function setup_global_config!(toml::Dict)
     end
     config["output_path"] = abspath(output_path)
     # Logging sets whether or not to setup and use Supernovae's logging
-    logging = get(config, "logging", false)
+    logging = get(config, "logging", true)
     config["logging"] = logging
     # Log file is the name of the log file. This will only work if logging is true
     # Can only be relative to output_path
