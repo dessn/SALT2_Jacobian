@@ -102,16 +102,22 @@ function jacobian_stage(toml, config)
     jacobian_path = get(toml, "path", nothing)
     # We are training a new jacobian
     if !isnothing(trained_surfaces)
+        if !isabspath(trained_surfaces) 
+            trained_surfaces = joinpath(config["base_path"], trained_surfaces)
+        end
+        trained_surfaces = abspath(trained_surfaces)
         @info "Training jacobian from $trained_surfaces"
-        spline_directory = joinpath(config["base_path"], trained_surfaces)
         jacobian = Jacobian(spline_directory) 
         name = get(toml, "name", "jacobian")
-        save_path = joinpath(config["output_path"], "$name.tar.gz")
+        save_path = joinpath(config["output_path"], "$name.fits")
         @info "Saving to $save_path"
         save_jacobian(jacobian, save_path)
     elseif !isnothing(jacobian_path)
+        if !isabspath(jacobian_path)
+            jacobian_path = joinpath(config["base_path"], jacobian_path)
+        end
+        jacobian_path = abspath(jacobian_path)
         @info "Loading jacobian from $jacobian_path"
-        fpath = joinpath(config["base_path"], jacobian_path)
         jacobian = load_jacobian(fpath)
     else
         @error "You must specify either a directory containing pretrained surfaces (via trained_surfaces = path) or a pretrained jacobian matrix (via path = path)"

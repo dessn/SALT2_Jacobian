@@ -25,7 +25,7 @@ The next global option is the `output_path` which is where all the output produc
 Finally you can specify whether or not to log via `logging`. This defaults to `true`, setting it to `false` will not produce a log file. The name of the log file is specified via `log_file` and defaults to `log.txt`. This will be placed in `output_path`.
 
 ```toml
-# Example Global options
+# Example global options
 [ global ]
 base_path = "/path/to/base"
 output_path = "relative/output/path"
@@ -33,10 +33,33 @@ logging = true
 log_file = "log.txt"
 ```
 
-### Creating new Jacobian matrices
+### Jacobian options 
+You can either create a new jacobian matrix, or simply use one which already exists.
 
+#### Create new jacobian matrix
+In order to create a jacobian matrix, you must first generate a set of surfaces, each of which has had a different systematic shifted. In addition a `SUBMIT.INFO` file is required. An example can be found at `Examples/TrainedSurfaces/OUTPUT_TRAIN_T21_suite/`. Once you have these surfaces created, you simply need to specify where that directory is via `trained_surfaces`. This can either be relative to `base_path` or absolute. In addition you can specify the name of the jacobian matrix to be saved via `name`, which defaults to `jacobian`. The jacobian matrix will be saved to `output_path/name.fits`
+```toml
+# Example jacobian matrix creation
+[ jacobian ]
+trained_surfaces = "path/to/trained/surfaces"
+```
+
+#### Use a precreated jacobian matrix
+If you just want to use a precreated jacobian matrix, such as the one in `src`, you simply need to point to it via `jacobian_path`, once again, either as a path relative to `base_path` or an absolute path.
+```toml
+# Example using a precreated jacobian matrix
+[ jacobian ]
+jacobian_path = "path/to/precreated/jacobian"
+```
 
 ### Training SALT2 surfaces
+In order to train new surfaces you must specify both a `submit_batch` input file and a base surface. The former can be specified via `input_file` (relative to `base_path` or absolute), and the latter via `base_surface` (relative to `base_path` or absolute).
+```toml
+# Example generating new surfaces
+[ surfaces ]
+input_file = "path/to/input/file"
+base_surface = "path/to/base/surface"
+```
 
 ### Comparing SALT2 surfaces
 
