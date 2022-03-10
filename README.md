@@ -8,7 +8,7 @@ The philosphy behind this is to start with an unperturbed SALT2 surface, and per
 The jacobian matrix itself is trained on a set of 70 perturbed SALT2 surfaces, each pertubed by a single systematic. The jacobian matrix simply records the effect of these purtubations on the colour law and spline components. When training a new SALT2 surface, this script approximates the true SALT2 training as a linear combination of the jacobian perturbations.
 
 ## Setup
-If you are on midway, you need to add `module load julia` to the end of your `.bashrc` so that you have access to the julia language. Once you are able to run `julia` you should head to `$DES_USERS/parmstrong/dev/SALT2_Jacobian` and run `./scripts/SALT2_Jacobian -s Examples/Inputs/FullRunthrough`. This will do a first time install of all the packages needed, and run through each stage. Assuming all went well, you should be fine to run the jacobian script on whatever you want.
+If you are on midway, you need to add `module load julia` to the end of your `.bashrc` so that you have access to the julia language (don't forget to `source ~/.bashrc` afterwards!). Once you are able to run `julia` you should head to `$DES_USERS/parmstrong/dev/SALT2_Jacobian` and run `./scripts/SALT2_Jacobian -s Examples/Inputs/FullRunthrough`. This will do a first time install of all the packages needed, and run through each stage. Assuming all went well, you should be fine to run the jacobian script on whatever you want.
 
 Eventually a dedicated app will be produced which can be run without julia installed on the system, but for the moment the above is required.
 
