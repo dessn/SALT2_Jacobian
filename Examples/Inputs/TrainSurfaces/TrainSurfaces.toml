@@ -4,7 +4,7 @@ output_path = "Outputs/T21Suite"
 logging = true
 
 [ jacobian ]
-path = "Outputs/CreateJacobian/jacobian.tar.gz" # Can be absolute or relative to base_path
+path = "Outputs/CreateJacobian/jacobian.fits" # Can be absolute or relative to base_path
 
 [ surfaces ]
 input_file = "Inputs/TrainSurfaces/T21Suite.input" # submit_batch input file which the jacobian matrix will approximate

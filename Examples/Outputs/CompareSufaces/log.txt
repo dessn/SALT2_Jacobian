@@ -1,4 +1,4 @@
-Main.SALT2_Jacobian | [Info] Logging to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/CompareSufaces/log.txt
+Main.SALT2_Jacobian | [Info] Logging to /project2/rkessler/SURVEYS/DES/USERS/parmstrong/dev/SALT2_Jacobian/Examples/Outputs/CompareSufaces/log.txt
 Main.SALT2_Jacobian | [Info] Comparing surfaces
 Main.SALT2_Jacobian | [Info] Comparison:
 ┌───────────────────────────────┬────────────────────────┬──────────┬──────────┬────────────┐

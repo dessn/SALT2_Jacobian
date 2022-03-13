@@ -107,7 +107,7 @@ function jacobian_stage(toml, config)
         end
         trained_surfaces = abspath(trained_surfaces)
         @info "Training jacobian from $trained_surfaces"
-        jacobian = Jacobian(spline_directory) 
+        jacobian = Jacobian(trained_surfaces) 
         name = get(toml, "name", "jacobian")
         save_path = joinpath(config["output_path"], "$name.fits")
         @info "Saving to $save_path"
@@ -118,7 +118,7 @@ function jacobian_stage(toml, config)
         end
         jacobian_path = abspath(jacobian_path)
         @info "Loading jacobian from $jacobian_path"
-        jacobian = load_jacobian(fpath)
+        jacobian = load_jacobian(jacobian_path)
     else
         @error "You must specify either a directory containing pretrained surfaces (via trained_surfaces = path) or a pretrained jacobian matrix (via path = path)"
         return nothing
@@ -212,7 +212,7 @@ function plot_stage(toml, config)
     if !isabspath(plot_path)
         plot_path = joinpath(config["base_path"], plot_path)
     end
-    plot_name = get(toml, "plot_name", "Comparison.svg")
+    plot_name = get(toml, "plot_name", "Surfaces.svg")
     save_path = joinpath(config["output_path"], plot_name)
     plot_surfaces = ensure_list(get(toml, "plot_surfaces", nothing))
     if isnothing(plot_surfaces[1])
@@ -224,12 +224,12 @@ function plot_stage(toml, config)
     fig, gax = plot_surface(plot_surfaces)
     save_plot(save_path, fig)
     if "comparison_plot_path" in keys(toml)
-        @info "Comparing surfaces"
+        @info "Plotting residuals"
         comparison_plot_path = toml["comparison_plot_path"]
         if !isabspath(comparison_plot_path)
             comparison_plot_path = joinpath(config["base_path"], comparison_plot_path)
         end
-        comparison_plot_name = get(toml, "comparison_plot_name", "Residual.svg")
+        comparison_plot_name = get(toml, "comparison_plot_name", "Residuals.svg")
         comparison_save_path = joinpath(config["output_path"], comparison_plot_name)
         comparison_plot_surfaces = ensure_list(get(toml, "comparison_plot_surfaces", nothing))
         if isnothing(comparison_plot_surfaces[1])

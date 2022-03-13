@@ -10,7 +10,7 @@ plot_path = "Outputs/T21Suite" # If you trained some new surfaces, then plot_pat
 # Optionally, you can choose specific surfaces to plot. If this isn't set, all TRAINOPTS will be plot together
 plot_surfaces = ["TRAINOPT043.tar.gz", "TRAINOPT044.tar.gz"]
 
-plot_name = "Comparison.svg" # Defaults to Comparison.svg
+plot_name = "Comparison.svg" # Defaults to Surfaces.svg
 
 # Optionally, you can specific a second set of trainopts and have them plotted as well. If this is specified, then a second plot showing the residual between TRAINOPTS in plot_path and comparison_plot_path will be created
 comparison_plot_path = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite/"

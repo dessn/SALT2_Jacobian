@@ -15,9 +15,14 @@ export JULIA_PROJECT=$DIR/.. # $DIR is the scripts directory, so we go up a leve
 export JULIA_LOAD_PATH=@:@stdlib  # exclude default environment
 exec env LD_LIBRARY_PATH="" $JULIA_CMD  -e 'include(popfirst!(ARGS))' "$SOURCE" "$@"
 =#
-
-# First get args so that we can crash ASAP
-using ArgParse
+# First get args so that we can crash ASAP. Try / catch to instantiate
+try
+    using ArgParse
+catch
+    using Pkg
+    Pkg.instantiate()
+    using ArgParse
+end
 
 function get_args()
     s = ArgParseSettings()
@@ -27,13 +32,10 @@ function get_args()
             action = :store_true
         "--jacobian", "-j"
             help = "Path to pretrained jacobian matrix"
-            default = abspath(joinpath("@__DIR__", "../src/jacobian.tar.gz"))
+            default = abspath(joinpath("@__DIR__", "../src/jacobian.fits"))
         "--base", "-b"
             help = "Path to base (unperturbed) surface)"
             default = abspath(joinpath(@__DIR__, "../src/TRAINOPT000.tar.gz"))
-        "--setup", "-s"
-            help = "Setup / instantiate packages"
-            action = :store_true
         "input"
             help = "Path to either .toml or .input file. If .toml then all other inputs except for -v are ignored"
             required = true
@@ -45,11 +47,6 @@ args = get_args()
 
 # Assuming args worked, do eveything else
 using TOML
-using Pkg
-
-if args["setup"]
-    Pkg.instantiate()
-end
 
 include("../src/SALT2_Jacobian.jl")
 using .SALT2_Jacobian
