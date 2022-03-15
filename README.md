@@ -41,33 +41,27 @@ log_file = "log.txt"
 ```
 
 ### Jacobian options 
-You can either create a new jacobian matrix, or simply use one which already exists.
+You can either create a new jacobian matrix, or simply use one which already exists. See `Examples/Inputs/CreateJacobian` for a working example.
 
 #### Create new jacobian matrix
 In order to create a jacobian matrix, you must first generate a set of surfaces, each of which has had a different systematic shifted. In addition a `SUBMIT.INFO` file is required. An example can be found at `Examples/TrainedSurfaces/OUTPUT_TRAIN_T21_suite/`. Once you have these surfaces created, you simply need to specify where that directory is via `trained_surfaces`. This can either be relative to `base_path` or absolute. In addition you can specify the name of the jacobian matrix to be saved via `name`, which defaults to `jacobian`. The jacobian matrix will be saved to `output_path/name.fits`
-```toml
-# Example jacobian matrix creation
-[ jacobian ]
-trained_surfaces = "path/to/trained/surfaces"
-```
 
 #### Use a precreated jacobian matrix
 If you just want to use a precreated jacobian matrix, such as the one in `src`, you simply need to point to it via `jacobian_path`, once again, either as a path relative to `base_path` or an absolute path.
-```toml
-# Example using a precreated jacobian matrix
-[ jacobian ]
-jacobian_path = "path/to/precreated/jacobian"
-```
 
 ### Training SALT2 surfaces
-In order to train new surfaces you must specify both a `submit_batch` input file and a base surface. The former can be specified via `input_file` (relative to `base_path` or absolute), and the latter via `base_surface` (relative to `base_path` or absolute).
-```toml
-# Example generating new surfaces
-[ surfaces ]
-input_file = "path/to/input/file"
-base_surface = "path/to/base/surface"
-```
+In order to train new surfaces you must specify both a `submit_batch` input file and a base surface. The former can be specified via `input_file` (relative to `base_path` or absolute), and the latter via `base_surface` (relative to `base_path` or absolute). See `Examples/Inputs/TrainSurfaces` for a working example.
 
 ### Comparing SALT2 surfaces
+This stage will compare surfaces by calculating the median percentage difference between the pca component and colour law values of each surface. See `Examples/Inputs/CompareSurfaces` for a working example.
+
+You can specify a set of surfaces to compare to via `comparison_path = "path/to/comparison/directory`. This can either be absolute or relative to `base_path` and should contain the `TRAINOPT***.tar.gz` files. If you trained some surfaces in the same `.toml` file, then those surfaces will be compared to the ones in `comparison_path`. Otherwise, you should also specify a `comparison_path_2`, which will instead be compared with `comparison_path`.
+
+Rather than comparing every `TRAINOPT` you can specify `comparison_surfaces = ["TRAINOPT000.tar.gz", ...]` (and `comparison_surfaces_2`) to choose what trainopts to compare
+
+Finally, you can use `strict_compare = true/false` to choose whether to compare one to one (i.e TRAINOPT000 to TRAINOPT000, TRAINOPT001, to TRAINOPT001, etc...) or all to all (TRAINOPT000 to TRAINOPT000, TRAINOPT000 to TRAINOPT001, etc...). There's also `summary = true/false` which specifies whether to show the median percentage difference or the percentage difference of each pca / colour law component. `summary = false` is more a debugging feature than a feature, so use sparingly.
 
 ### Plotting SALT2 surfaces
+Much like the comparison stage, the plotting stage has different behaviour, depending on whether you trained new surfaces. or not. See `Examples/Inputs/PlotSurfaces` for a working example.
+
+
