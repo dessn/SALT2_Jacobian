@@ -1,0 +1,25 @@
+Main.SALT2_Jacobian | [Info] Logging to /project2/rkessler/SURVEYS/DES/USERS/parmstrong/dev/SALT2_Jacobian/Examples/Outputs/Systematic/log.txt
+Main.SALT2_Jacobian | [Info] Generating Jacobian
+Main.SALT2_Jacobian | [Info] Training jacobian from /project2/rkessler/SURVEYS/DES/USERS/parmstrong/dev/SALT2_Jacobian/Examples/TrainedSurfaces/OUTPUT_TRAIN_T21_suite
+Main.SALT2_Jacobian | [Info] Saving to /project2/rkessler/SURVEYS/DES/USERS/parmstrong/dev/SALT2_Jacobian/Examples/Outputs/Systematic/jacobian.fits
+Main.SALT2_Jacobian | [Info] Approximating Surfaces
+Main.SALT2_Jacobian | [Info] Comparing surfaces
+Main.SALT2_Jacobian | [Info] Comparison:
+┌───────────────────────────────┬───────────────────────────┬───────────┬──────────┬────────────┐
+│        SALT2 Trained Surfaces │ Jacobian Trained Surfaces │  Spline 1 │ Spline 2 │ Colour Law │
+├───────────────────────────────┼───────────────────────────┼───────────┼──────────┼────────────┤
+│  Median Percentage Difference │                           │ 0.0805377 │  0.12256 │   0.646965 │
+│                               │                           │           │          │            │
+│ Maximum Percentage Difference │                  Spline 1 │           │          │            │
+│                   TRAINOPT001 │               TRAINOPT001 │  0.161075 │ 0.245121 │    1.29393 │
+│ Maximum Percentage Difference │                  Spline 2 │           │          │            │
+│                   TRAINOPT001 │               TRAINOPT001 │  0.161075 │ 0.245121 │    1.29393 │
+│ Maximum Percentage Difference │                Colour Law │           │          │            │
+│                   TRAINOPT001 │               TRAINOPT001 │  0.161075 │ 0.245121 │    1.29393 │
+│                               │                           │           │          │            │
+│                   TRAINOPT000 │               TRAINOPT000 │       0.0 │      0.0 │        0.0 │
+│                   TRAINOPT001 │               TRAINOPT001 │  0.161075 │ 0.245121 │    1.29393 │
+└───────────────────────────────┴───────────────────────────┴───────────┴──────────┴────────────┘
+
+Main.SALT2_Jacobian | [Info] Plotting surfaces
+Main.SALT2_Jacobian | [Info] Plotting residuals

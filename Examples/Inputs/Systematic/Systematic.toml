@@ -1,0 +1,18 @@
+[ global ]
+base_path = "../../"
+output_path = "Outputs/Systematic"
+logging = true
+
+[ jacobian ]
+trained_surfaces = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite"
+
+[ surfaces ]
+input_file = "Inputs/Systematic/Systematic.input"
+base_surface = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite/TRAINOPT000.tar.gz"
+
+[ compare ]
+comparison_path = "TrainedSurfaces/Systematic/OUTPUT_TRAIN"
+comparison_name = "SALT2 Trained Surfaces"
+
+[ plot ]
+comparison_plot_path = "TrainedSurfaces/Systematic/OUTPUT_TRAIN"
