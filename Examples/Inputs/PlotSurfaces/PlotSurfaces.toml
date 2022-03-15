@@ -1,6 +1,5 @@
 [ global ]
 base_path = "../../"
-data_path = "./" # This time we are setting data_path to be equal to base_path
 output_path = "Outputs/PlotSufaces"
 logging = true
 
