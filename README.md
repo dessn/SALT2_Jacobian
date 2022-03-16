@@ -12,10 +12,10 @@ Note that this does not currently approximate the uncertainty in the colour law 
 ## Setup
 To use this package, you simply need to `git clone` it someone on your device, and have a working julia instance.
 
-If you are on midway, you need to add `module load julia` to the end of your `.bashrc` so that you have access to the julia language (don't forget to `source ~/.bashrc` afterwards!). Once you are able to run `julia` you should head to `$DES_USERS/parmstrong/dev/SALT2_Jacobian` and run `./scripts/SALT2_Jacobian Examples/Inputs/FullRunthrough`. This will do a first time install of all the packages needed, and run through each stage. Assuming all went well, you should be fine to run the jacobian script on whatever you want.
+If you are on midway, you need to add `module load julia` to the end of your `.bashrc` so that you have access to the julia language (don't forget to `source ~/.bashrc` afterwards!). Once you are able to run `julia` you should head to `$PRODUCTS/SALT2_Jacobian` and run `./scripts/SALT2_Jacobian Examples/Inputs/FullRunthrough`. This will do a first time install of all the packages needed, and run through each stage. Assuming all went well, you should be fine to run the jacobian script on whatever you want.
 
 ### Recommended additions
-In order to use the `SALT2_Jacobian` script anywhere on your system, it is recommended to add the `SALT2_Jacobian/scripts` directory to your path. On Midway this entails adding `export PATH=$PATH:"/project2/rkessler/SURVEYS/DES/USERS/parmstrong/dev/SALT2_Jacobian/scripts"` to your `.bashrc` (and sourcing it again).
+In order to use the `SALT2_Jacobian` script anywhere on your system, it is recommended to add the `SALT2_Jacobian/scripts` directory to your path. On Midway this entails adding `export PATH=$PATH:"/project2/rkessler/PRODUCTS/SALT2_Jacobian/scripts"` to your `.bashrc` (and sourcing it again).
 
 ## Usage
 If you just want to generate a set of SALT2 surfaces quickly, then you simply need to produce a `submit_batch.input` file as you normally would for SALT2, and run `./scripts/SALT2_Jacobian /path/to/your/submit_batch.input`. This will use the jacobian matrix and base surface found in `src`. Note that this jacobian matrix and base surface are based on SALT2_T21. If you want to use a different SALT2 version (or possibly SALT3) you'll need to generate your own suite of offsets, similar to `Examples/TrainedSurfaces/OUTPUT_TRAIN_T21_suite`.
