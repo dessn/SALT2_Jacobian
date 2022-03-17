@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #=
 JULIA="${JULIA:-julia}"
-JULIA_CMD="${JULIA_CMD:-$JULIA --color=yes --startup-file=no --project=.}"
+JULIA_CMD="${JULIA_CMD:-$JULIA --color=yes --startup-file=no}"
 # below gets the directory name of the script, even if there is a symlink involved
 # from https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself
 SOURCE="${BASH_SOURCE[0]}"
@@ -13,7 +13,8 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 export JULIA_PROJECT=$DIR/.. # $DIR is the scripts directory, so we go up a level to get to the base project directory
 export JULIA_LOAD_PATH=@:@stdlib  # exclude default environment
-exec env JULIA_DEPOT_PATH=$JULIA_PROJECT LD_LIBRARY_PATH="" $JULIA_CMD  -e 'include(popfirst!(ARGS))' "$SOURCE" "$@"
+export JULIA_DEPOT_PATH=$JULIA_PROJECT
+exec env LD_LIBRARY_PATH="" $JULIA_CMD -e 'include(popfirst!(ARGS))' "$SOURCE" "$@"
 =#
 # First check whether we need to instantiate
 using Pkg
