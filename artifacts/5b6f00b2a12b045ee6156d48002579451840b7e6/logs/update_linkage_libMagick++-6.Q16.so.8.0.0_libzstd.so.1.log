@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libzstd.so.1 libzstd.so.1 lib/libMagick++-6.Q16.so.8.0.0`

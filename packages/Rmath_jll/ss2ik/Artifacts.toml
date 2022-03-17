@@ -1,0 +1,143 @@
+[[Rmath]]
+arch = "aarch64"
+git-tree-sha1 = "96eeb87b24f9e7da21d9487a792f7b63971f5384"
+os = "macos"
+
+    [[Rmath.download]]
+    sha256 = "d066658a6adbe6a9c936c49c1edc968ae85d6da858e9c96fb988df1b03853c98"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.aarch64-apple-darwin.tar.gz"
+[[Rmath]]
+arch = "aarch64"
+git-tree-sha1 = "0ca1836ed7b07556e0eb3551a4a27ccc61f470a0"
+libc = "glibc"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "19947561dae82c81663e2b95502a72e95c1d63b519b6a7a4ea3a05ab7a736304"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.aarch64-linux-gnu.tar.gz"
+[[Rmath]]
+arch = "aarch64"
+git-tree-sha1 = "6aba336c66ef66558e2c458c997606fa1affe43a"
+libc = "musl"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "924cdb72eb08d4275dfcf367dc7e8d91be1e60a51bbf7c83214fe263ec84d7cf"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.aarch64-linux-musl.tar.gz"
+[[Rmath]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "826e450028472f73cbf3bf8c36931bbb772294d4"
+libc = "glibc"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "f6d065142969568ce5f47fbb7494a40b87d99ac6fa4c430130b8c755d118d58d"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.armv6l-linux-gnueabihf.tar.gz"
+[[Rmath]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "8dd8dc46b4bad08859cfb4daa34f7a8a467a5828"
+libc = "musl"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "53adf3396392d960b89920ee418bb228545e77860b2d3b59a9e6787cc26d75e0"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.armv6l-linux-musleabihf.tar.gz"
+[[Rmath]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "541c4b5143fa6eec009f06eb83f1c70063c7ab85"
+libc = "glibc"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "0dee5c24dfe187f760cc6b61c72730b91a90dc851eeb11a235f0ea1a80a77d45"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.armv7l-linux-gnueabihf.tar.gz"
+[[Rmath]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "003b35f29a51d0a0a5b5172f5764ee5d758db423"
+libc = "musl"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "fc01e80e1fb0eb3831b29f78a315c1daa8509575a8a4cfcf67e68c9c21cf6923"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.armv7l-linux-musleabihf.tar.gz"
+[[Rmath]]
+arch = "i686"
+git-tree-sha1 = "cc03d64ffe1254166c0a6506cb955c65624a5fac"
+libc = "glibc"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "652db5d909b2b39c8fd32f05b20dac6d65dc39d0a7cd42bf440e1ba25de42afb"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.i686-linux-gnu.tar.gz"
+[[Rmath]]
+arch = "i686"
+git-tree-sha1 = "0b10db47b44ed97cf4ad10bf7a06663320b8e8df"
+libc = "musl"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "4cc5a2da89f1c557c26a2c5e2089721ce13d398aff251a534e0fe593b91fb894"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.i686-linux-musl.tar.gz"
+[[Rmath]]
+arch = "i686"
+git-tree-sha1 = "1578bbb4675d1eff431cdb089e504b090db6657d"
+os = "windows"
+
+    [[Rmath.download]]
+    sha256 = "7295c4fd1535a5bbe3445138cda28f808094dd6794d5010c1aa4bb1c7d20dbde"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.i686-w64-mingw32.tar.gz"
+[[Rmath]]
+arch = "powerpc64le"
+git-tree-sha1 = "b5d905412025848dec43189f9262d59413feba42"
+libc = "glibc"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "3b287b9cfc11d47e490752f146557694b96bdeee1e8cdbe8f3f5ed353a229f6d"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.powerpc64le-linux-gnu.tar.gz"
+[[Rmath]]
+arch = "x86_64"
+git-tree-sha1 = "491ec12284dc38f968ff25c087fb293d4c722771"
+os = "macos"
+
+    [[Rmath.download]]
+    sha256 = "5ebfc69a04a46e91d6b703e604b063acc57f3993e16299fca76875b7b8903a72"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.x86_64-apple-darwin.tar.gz"
+[[Rmath]]
+arch = "x86_64"
+git-tree-sha1 = "9a817fe95402e93afa0a95dca247685f61b16664"
+libc = "glibc"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "aa140bd15d59b420ddc038e508ce7c6f04f90a7ee3440c5c0c55f2bbce7a2227"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.x86_64-linux-gnu.tar.gz"
+[[Rmath]]
+arch = "x86_64"
+git-tree-sha1 = "756d6a65e0af0413aba03999475410419582f7cd"
+libc = "musl"
+os = "linux"
+
+    [[Rmath.download]]
+    sha256 = "0151fcf46e2ce304becbdb777bee6f3a6b9136754cd590c8d87aa77364c9243b"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.x86_64-linux-musl.tar.gz"
+[[Rmath]]
+arch = "x86_64"
+git-tree-sha1 = "2d250572c6c768cfe99273e47e661cbabf646b80"
+os = "freebsd"
+
+    [[Rmath.download]]
+    sha256 = "08c0ac1e121cc149289aa621a143438284e08540f74212011ee6ee3fb54509d8"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.x86_64-unknown-freebsd.tar.gz"
+[[Rmath]]
+arch = "x86_64"
+git-tree-sha1 = "8c1c1529ea289add57db6b790a3039ba491acdce"
+os = "windows"
+
+    [[Rmath.download]]
+    sha256 = "4263e6d28693bca5fb4e171f86186314a3e23655018371a7e511b24b1715e015"
+    url = "https://github.com/JuliaBinaryWrappers/Rmath_jll.jl/releases/download/Rmath-v0.3.0+0/Rmath.v0.3.0.x86_64-w64-mingw32.tar.gz"

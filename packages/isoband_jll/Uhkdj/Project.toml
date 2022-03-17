@@ -1,0 +1,10 @@
+name = "isoband_jll"
+uuid = "9a68df92-36a6-505f-a73e-abb412b6bfb4"
+version = "0.2.2+0"
+
+[deps]
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+
+[compat]
+julia = "1.0"

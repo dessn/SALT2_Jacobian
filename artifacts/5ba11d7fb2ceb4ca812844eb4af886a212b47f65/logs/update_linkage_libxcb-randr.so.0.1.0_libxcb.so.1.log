@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libxcb.so.1 libxcb.so.1 lib/libxcb-randr.so.0.1.0`

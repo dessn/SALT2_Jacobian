@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libXdmcp.so.6 libXdmcp.so.6 lib/libxcb-randr.so.0.1.0`

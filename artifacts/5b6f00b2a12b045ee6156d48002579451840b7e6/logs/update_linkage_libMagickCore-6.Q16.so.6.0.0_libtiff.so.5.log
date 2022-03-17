@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libtiff.so.5 libtiff.so.5 lib/libMagickCore-6.Q16.so.6.0.0`

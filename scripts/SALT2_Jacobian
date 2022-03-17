@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #=
 JULIA="${JULIA:-julia}"
-JULIA_CMD="${JULIA_CMD:-$JULIA --color=yes --startup-file=no}"
+JULIA_CMD="${JULIA_CMD:-$JULIA --color=yes --startup-file=no --project=.}"
 # below gets the directory name of the script, even if there is a symlink involved
 # from https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself
 SOURCE="${BASH_SOURCE[0]}"
@@ -13,16 +13,19 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 export JULIA_PROJECT=$DIR/.. # $DIR is the scripts directory, so we go up a level to get to the base project directory
 export JULIA_LOAD_PATH=@:@stdlib  # exclude default environment
-exec env LD_LIBRARY_PATH="" $JULIA_CMD  -e 'include(popfirst!(ARGS))' "$SOURCE" "$@"
+exec env JULIA_DEPOT_PATH=$JULIA_PROJECT LD_LIBRARY_PATH="" $JULIA_CMD  -e 'include(popfirst!(ARGS))' "$SOURCE" "$@"
 =#
-# First get args so that we can crash ASAP. Try / catch to instantiate
-try
-    using ArgParse
-catch
-    using Pkg
+# First check whether we need to instantiate
+using Pkg
+using TOML
+installed_deps = sort!([pair.second.name for pair in Pkg.dependencies() if pair.second.is_direct_dep])
+deps = sort!(collect(keys(TOML.parsefile(abspath("$(@__DIR__)/../Project.toml"))["deps"])))
+if installed_deps != deps
+    @info "Missing some packages, instantiating"
     Pkg.instantiate()
-    using ArgParse
 end
+
+using ArgParse
 
 function get_args()
     s = ArgParseSettings()

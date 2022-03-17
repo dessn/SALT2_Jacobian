@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libXdmcp.so.6 libXdmcp.so.6 lib/libxcb-record.so.0.0.0`

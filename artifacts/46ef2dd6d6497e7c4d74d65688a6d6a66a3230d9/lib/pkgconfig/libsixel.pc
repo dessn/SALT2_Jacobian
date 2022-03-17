@@ -1,0 +1,10 @@
+prefix=/workspace/destdir
+exec_prefix=${prefix}
+libdir=/workspace/destdir/lib
+includedir=/workspace/destdir/include
+
+Name: libsixel
+Description: A lightweight, fast implementation of DEC SIXEL graphics codec
+Version: 1.8.1
+Libs: -L${libdir} -lsixel
+Cflags: -I${includedir}

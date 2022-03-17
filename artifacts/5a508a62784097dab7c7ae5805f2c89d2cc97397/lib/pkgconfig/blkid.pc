@@ -1,0 +1,10 @@
+prefix=/workspace/destdir
+exec_prefix=/workspace/destdir
+libdir=/workspace/destdir/lib
+includedir=/workspace/destdir/include
+
+Name: blkid
+Description: Block device id library
+Version: 2.35.0
+Cflags: -I${includedir}/blkid
+Libs: -L${libdir} -lblkid

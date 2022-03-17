@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --set-rpath '/workspace/destdir/lib:$ORIGIN' lib/libxcb-randr.so.0.1.0`

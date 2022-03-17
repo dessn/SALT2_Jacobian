@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libjpeg.so.62 libjpeg.so.62 bin/display`
