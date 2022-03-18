@@ -7,7 +7,15 @@ logging = true
 trained_surfaces = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite"
 
 [ surfaces ]
-input_file = "Inputs/FullRunthrough/train_SALT2.input"
+trainopts = [
+    "MAGSHIFT CfA3_KEPLERCAM Us 0.01",
+    "WAVESHIFT CfA3_KEPLERCAM i 1.0",
+    "MAGSHIFT SDSS g 0.01",
+    "MAGSHIFT SDSS g,z 0.01,-0.01 MAGSHIFT CfA2 B 0.01",
+    "WAVESHIFT CfA3_STANDARD r,i 10,10 MAGSHIFT CfA3_STANDARD I .01",
+    "MAGSHIFT Calan/Tololo B 0.01",
+    "WAVESHIFT CfA1 U 1.0"
+]
 base_surface = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite/TRAINOPT000.tar.gz"
 
 [ compare ]

@@ -1,4 +1,0 @@
-Main.SALT2_Jacobian | [Info] Logging to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Inputs/QuickNDirty/Output/log.txt
-Main.SALT2_Jacobian | [Info] Generating Jacobian
-Main.SALT2_Jacobian | [Info] Loading jacobian from /home/patricka/.julia/dev/SALT2_Jacobian/src/jacobian.fits
-Main.SALT2_Jacobian | [Info] Approximating Surfaces

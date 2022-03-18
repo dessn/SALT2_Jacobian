@@ -13,18 +13,20 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 export JULIA_PROJECT=$DIR/.. # $DIR is the scripts directory, so we go up a level to get to the base project directory
 export JULIA_LOAD_PATH=@:@stdlib  # exclude default environment
-export JULIA_DEPOT_PATH=$JULIA_PROJECT
+export JULIA_DEPOT_PATH=$JULIA_PROJECT/.julia
 exec env LD_LIBRARY_PATH="" $JULIA_CMD -e 'include(popfirst!(ARGS))' "$SOURCE" "$@"
 =#
 # First check whether we need to instantiate
 using Pkg
-using TOML
-installed_deps = sort!([pair.second.name for pair in Pkg.dependencies() if pair.second.is_direct_dep])
-deps = sort!(collect(keys(TOML.parsefile(abspath("$(@__DIR__)/../Project.toml"))["deps"])))
-if installed_deps != deps
-    @info "Missing some packages, instantiating"
-    Pkg.instantiate()
-end
+Pkg.instantiate()
+#installed_deps = sort!([pair.second.name for pair in Pkg.dependencies() if pair.second.is_direct_dep])
+#deps = sort!(collect(keys(TOML.parsefile(abspath("$(@__DIR__)/../Project.toml"))["deps"])))
+#@show installed_deps
+#@show deps
+#if installed_deps != deps
+#    @info "Missing some packages, instantiating"
+#    Pkg.instantiate()
+#end
 
 using ArgParse
 
@@ -36,13 +38,22 @@ function get_args()
             action = :store_true
         "--jacobian", "-j"
             help = "Path to pretrained jacobian matrix"
-            default = abspath("$(@__DIR__)/../src/jacobian.fits")
+            default = nothing 
         "--base", "-b"
             help = "Path to base (unperturbed) surface)"
-            default = abspath("$(@__DIR__)/../src/TRAINOPT000.tar.gz")
+            default = nothing 
+        "--output", "-o"
+            help = "Path to output directory, in which everything will be saved"
+            default = nothing
+        "--yaml", "-y"
+            help = "Path to output yaml file. If specified, will not log, and instead will create a .yaml file, to be SNANA compliant"
+            default = nothing
+        "--trainopt", "-t"
+            help = "TRAINOPT string, as used by submit_batch"
+            default = nothing
         "input"
-            help = "Path to either .toml or .input file. If .toml then all other inputs except for -v are ignored"
-            required = true
+            help = "Path to .toml file. When given, all other options are ignored, expect for -v"
+            default = nothing
     end
 
     return parse_args(s)
@@ -57,20 +68,47 @@ using .SALT2_Jacobian
 
 # Run script
 verbose = args["verbose"]
-input_path = abspath(args["input"])
-if splitext(input_path)[end] == ".toml"
-    toml = input_path
-else
-    jacobian_path = args["jacobian"]
-    base_surface = args["base"]
-    output_path = open(input_path, "r") do io
-        lines = readlines(io)
-        out_line = lines[findfirst(x -> occursin("OUTDIR:", x), lines)]
-        return split(out_line)[end]
+yaml_path = args["yaml"]
+# If you specify a toml, just use that
+try
+    if !isnothing(args["input"])
+        toml = abspath(args["input"])
+    # Otherwise, we build our own dictionary from the given parameters
+    else
+        logging = isnothing(yaml_path)
+        jacobian_path = args["jacobian"]
+        if isnothing(jacobian_path)
+            error("You must specify a jacobian path via --jacobian/-j if running from the command line (or from submit_batch)")
+        end
+        base_surface = args["base"]
+        if isnothing(base_surface)
+            error("You must specify a base surface via --base/-b if running from the command line (or from submit_batch)")
+        end
+        output_path = args["output"]
+        if isnothing(output_path)
+            error("You must specify an output directory via --output/-o if running from the command line (or from submit_batch)")
+        end
+        trainopt = args["trainopt"]
+        if isnothing(trainopt)
+            error("You must specify a trainopt via --trainopt/-t if running from the command line (or from submit_batch)")
+        end
+        global_dict = Dict("base_path" => "./", "output_path" => output_path, "logging" => logging)
+        jacobian = Dict("path" => jacobian_path)
+        surfaces = Dict("trainopts" => trainopt, "base_surface" => base_surface)
+        toml = Dict("toml_path" => output_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
     end
-    global_dict = Dict("base_path" => "./", "output_path" => output_path, "logging" => true)
-    jacobian = Dict("path" => jacobian_path)
-    surfaces = Dict("input_file" => input_path, "base_surface" => base_surface)
-    toml = Dict("toml_path" => input_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
+        process_jacobian(toml, verbose)
+        if !isnothing(yaml_path)
+            open(yaml_path, "w") do io
+                write(io, "ABORT_IF_ZERO: 1")
+            end
+        end
+catch e
+    if !isnothing(yaml_path)
+        open(yaml_path, "w") do io
+            write(io, "ABORT_IF_ZERO: 0\nERROR: $e")
+        end
+    end
+    throw(e)
 end
-process_jacobian(toml, verbose)
+

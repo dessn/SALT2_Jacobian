@@ -129,14 +129,11 @@ end
 function surfaces_stage(toml, config, jacobian)
     @info "Approximating Surfaces"
     base_surface_path = toml["base_surface"]
-        if !isabspath(base_surface_path)
-            base_surface_path = joinpath(config["base_path"], base_surface_path)
-        end
-        input_file = toml["input_file"]
-        if !isabspath(input_file)
-            input_file = joinpath(config["base_path"], input_file)
-        end
-        train_surfaces(input_file, base_surface_path, jacobian, config["output_path"])
+    if !isabspath(base_surface_path)
+        base_surface_path = joinpath(config["base_path"], base_surface_path)
+    end
+    input_trainopts = ensure_list(toml["trainopts"])
+    train_surfaces(input_trainopts, base_surface_path, jacobian, config["output_path"])
 end
 
 function comparison_stage(toml, config)

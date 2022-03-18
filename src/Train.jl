@@ -13,8 +13,7 @@ using ..JacobianModule
 export train_surfaces
 
 # Main function for training a surface
-function train_surfaces(input_file, base_surface_path, jacobian, outdir)
-    input_trainopts = parse_input_file(input_file)
+function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir)
     base_surface = Surface("TRAINOPT000", "", base_surface_path)
     cp(base_surface_path, joinpath(outdir, "TRAINOPT000.tar.gz"), force=true)
 
@@ -23,7 +22,7 @@ function train_surfaces(input_file, base_surface_path, jacobian, outdir)
     base_colour_law = base_surface.colour_law.a
     
     # For each trainopt, train a surface
-    Threads.@threads for (i, trainopt) in ProgressBar(collect(enumerate(input_trainopts)))
+    for (i, trainopt) in ProgressBar(collect(enumerate(input_trainopts)))
         spline_1_offset = zeros(length(base_spline_1))
         spline_2_offset = zeros(length(base_spline_2))
         colour_law_offset = zeros(length(base_colour_law))
@@ -86,42 +85,45 @@ function train_surfaces(input_file, base_surface_path, jacobian, outdir)
         compress(trainopt_dir, destination_dir) 
     end
 end
-        
-# Parse the input file used by submit_batch
-function parse_input_file(input_file)
-    raw = open(input_file, "r") do io
-        return readlines(io)
-    end
-    trainopts = [line for line in raw if occursin("SHIFT", line)]
-    trainopts = [split(line, "#")[1] for line in trainopts]
-    trainopts = [split(line)[2:end] for line in trainopts]
-    trainopts = [process_trainopts(line) for line in trainopts]
-    return trainopts
-end
 
+function train_surfaces(input_trainopts::Vector{String}, base_surface_path, jacobian, outdir)
+    input_trainopts = process_trainopts(input_trainopts)
+    train_surfaces(input_trainopts, base_surface_path, jacobian, outdir)
+end
+        
 # Get trainopts into a consistent form
-function process_trainopts(opt)
+function process_trainopts(opts)
     mag_eq = ["CfA3_STANDARD", "Calan/Tololo", "Other"]
     wave_eq = ["CfA3_STANDARD", "Calan/Tololo", "Other", "CfA2", "CfA1"]
-    chunk(arr, n) = [arr[i:min(i + n - 1, end)] for i in 1:n:length(arr)] # Splits arr into n 
-    opt_sets = chunk(opt, 4)
-    rtn = Dict()
-    for opt in opt_sets
-        is_mag = opt[1] == "MAGSHIFT"
-        if is_mag
-            eq = mag_eq
-        else
-            eq = wave_eq
+    rtn = [] 
+    for trainopt in opts
+        elem = Dict()
+        trainopt = split(trainopt)
+        opt_list = []
+        for opt in trainopt
+            if occursin("SHIFT", opt)
+                push!(opt_list, [])
+            end
+            push!(opt_list[end], opt)
         end
-        if opt[2] in eq
-            opt[2] = eq[1]
-            opt[3] = uppercase(opt[3])
+        for opt in opt_list
+            is_mag = opt[1] == "MAGSHIFT"
+            if is_mag
+                eq = mag_eq
+            else
+                eq = wave_eq
+            end
+            if opt[2] in eq
+                opt[2] = eq[1]
+                opt[3] = uppercase(opt[3])
+            end
+            opt3 = split(opt[3], ',')
+            opt4 = split(opt[4], ',')
+            for i in 1:length(opt3)
+                elem["$(opt[1]) $(opt[2]) $(opt3[i])"] = opt4[i]
+            end
         end
-        opt3 = split(opt[3], ',')
-        opt4 = split(opt[4], ',')
-        for i in 1:length(opt3)
-            rtn["$(opt[1]) $(opt[2]) $(opt3[i])"] = opt4[i]
-        end
+        push!(rtn, elem)
     end
     return rtn
 end
