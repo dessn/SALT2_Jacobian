@@ -28,3 +28,4 @@ Main.SALT2_Jacobian | [Info] Comparison:
 └───────────────────────────────┴───────────────────────────┴─────────────┴────────────┴────────────┘
 
 Main.SALT2_Jacobian | [Info] Plotting surfaces
+Main.SALT2_Jacobian | [Info] Plotting residuals

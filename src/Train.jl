@@ -13,16 +13,20 @@ using ..JacobianModule
 export train_surfaces
 
 # Main function for training a surface
-function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir)
+function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, batch_mode)
     base_surface = Surface("TRAINOPT000", "", base_surface_path)
-    cp(base_surface_path, joinpath(outdir, "TRAINOPT000.tar.gz"), force=true)
+    if !batch_mode
+        new_base_surface_path = joinpath(outdir, "TRAINOPT000.tar.gz")
+        cp(base_surface_path, new_base_surface_path, force=true)
+    end
 
     base_spline_1 = base_surface.spline.components[1].values
     base_spline_2 = base_surface.spline.components[2].values
     base_colour_law = base_surface.colour_law.a
     
     # For each trainopt, train a surface
-    for (i, trainopt) in ProgressBar(collect(enumerate(input_trainopts)))
+    #for (i, trainopt) in ProgressBar(collect(enumerate(input_trainopts)))
+    for (i, trainopt) in collect(enumerate(input_trainopts))
         spline_1_offset = zeros(length(base_spline_1))
         spline_2_offset = zeros(length(base_spline_2))
         colour_law_offset = zeros(length(base_colour_law))
@@ -46,8 +50,7 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir)
         
 
         # Copy TRAINOPT000 files over
-        destination_dir = joinpath(outdir, "TRAINOPT$(lpad(i,3,"0")).tar.gz")
-        trainopt_dir_orig = uncompress(joinpath(outdir, "TRAINOPT000.tar.gz"))
+        trainopt_dir_orig = uncompress(base_surface_path)
         trainopt_dir = trainopt_dir_orig
         trainopt_dir = trainopt_dir[1: end-3] * lpad(i, 3, "0")
         mv(trainopt_dir_orig, trainopt_dir)
@@ -81,14 +84,22 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir)
         end
 
         # Save and compress final surface
-        trainopt_dir = join(split(trainopt_dir, "/")[1:end-1], "/")
-        compress(trainopt_dir, destination_dir) 
+        if !batch_mode
+            trainopt_dir = join(split(trainopt_dir, "/")[1:end-1], "/")
+            destination_dir = joinpath(outdir, "TRAINOPT$(lpad(i,3,"0")).tar.gz")
+            compress(trainopt_dir, destination_dir) 
+        else
+            destination_dir = outdir 
+            for file in readdir(trainopt_dir)
+                cp(joinpath(trainopt_dir, file), joinpath(destination_dir, file), force=true)
+            end
+        end
     end
 end
 
-function train_surfaces(input_trainopts::Vector{String}, base_surface_path, jacobian, outdir)
+function train_surfaces(input_trainopts::Vector{String}, base_surface_path, jacobian, outdir, batch_mode)
     input_trainopts = process_trainopts(input_trainopts)
-    train_surfaces(input_trainopts, base_surface_path, jacobian, outdir)
+    train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, batch_mode)
 end
         
 # Get trainopts into a consistent form

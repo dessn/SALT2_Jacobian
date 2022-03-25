@@ -20,6 +20,7 @@ using .Compare
 include("Plot.jl")
 using .Plot
 
+
 # Exports
 export process_jacobian
 
@@ -126,14 +127,14 @@ function jacobian_stage(toml, config)
     return jacobian
 end
 
-function surfaces_stage(toml, config, jacobian)
+function surfaces_stage(toml, config, jacobian, batch_mode)
     @info "Approximating Surfaces"
     base_surface_path = toml["base_surface"]
     if !isabspath(base_surface_path)
         base_surface_path = joinpath(config["base_path"], base_surface_path)
     end
     input_trainopts = ensure_list(toml["trainopts"])
-    train_surfaces(input_trainopts, base_surface_path, jacobian, config["output_path"])
+    train_surfaces(input_trainopts, base_surface_path, jacobian, config["output_path"], batch_mode)
 end
 
 function comparison_stage(toml, config)
@@ -241,7 +242,7 @@ function plot_stage(toml, config)
     end
 end
 
-function process_jacobian(toml::Dict, verbose::Bool)
+function process_jacobian(toml::Dict, batch_mode::Bool, verbose::Bool)
     setup_global_config!(toml)
     config = toml["global"]
     
@@ -260,7 +261,6 @@ function process_jacobian(toml::Dict, verbose::Bool)
     @debug "Output path: $(config["output_path"])"
 
     # Create / load jacobian
-    # TODO Move logic ou of Jacobian Module and in to here
     if "jacobian" in keys(toml)
         jacobian = jacobian_stage(toml["jacobian"], config)
     else
@@ -272,7 +272,7 @@ function process_jacobian(toml::Dict, verbose::Bool)
         if isnothing(jacobian)
             @error "Can not approximate surfaces without a jacobian! Please define one via [ jacobian ]"
         end
-        surfaces_stage(toml["surfaces"], config, jacobian)
+        surfaces_stage(toml["surfaces"], config, jacobian, batch_mode)
     end
 
     # Compare surfaces
@@ -288,10 +288,10 @@ function process_jacobian(toml::Dict, verbose::Bool)
     end
 end
 
-function process_jacobian(toml_path::AbstractString, verbose::Bool)
+function process_jacobian(toml_path::AbstractString, batch_mode::Bool, verbose::Bool)
     toml = TOML.parsefile(toml_path)
     toml["toml_path"] = abspath(toml_path)
-    return process_jacobian(toml, verbose)
+    return process_jacobian(toml, batch_mode, verbose)
 end
 
 end

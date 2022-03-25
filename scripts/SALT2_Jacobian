@@ -46,11 +46,14 @@ function get_args()
             help = "Path to output directory, in which everything will be saved"
             default = nothing
         "--yaml", "-y"
-            help = "Path to output yaml file. If specified, will not log, and instead will create a .yaml file, to be SNANA compliant"
+            help = "Path to output yaml file. Will create a .yaml file, to be SNANA compliant"
             default = nothing
         "--trainopt", "-t"
             help = "TRAINOPT string, as used by submit_batch"
             default = nothing
+        "--batch"
+            help = "Whether or not we're running in batch mode. This changes a few options here and there."
+            action = :store_true
         "input"
             help = "Path to .toml file. When given, all other options are ignored, expect for -v"
             default = nothing
@@ -69,13 +72,14 @@ using .SALT2_Jacobian
 # Run script
 verbose = args["verbose"]
 yaml_path = args["yaml"]
+batch_mode = args["batch"]
 # If you specify a toml, just use that
 try
     if !isnothing(args["input"])
         toml = abspath(args["input"])
     # Otherwise, we build our own dictionary from the given parameters
     else
-        logging = isnothing(yaml_path)
+        logging = !batch_mode 
         jacobian_path = args["jacobian"]
         if isnothing(jacobian_path)
             error("You must specify a jacobian path via --jacobian/-j if running from the command line (or from submit_batch)")
@@ -97,7 +101,7 @@ try
         surfaces = Dict("trainopts" => trainopt, "base_surface" => base_surface)
         toml = Dict("toml_path" => output_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
     end
-        process_jacobian(toml, verbose)
+        process_jacobian(toml, batch_mode, verbose)
         if !isnothing(yaml_path)
             open(yaml_path, "w") do io
                 write(io, "ABORT_IF_ZERO: 1")
