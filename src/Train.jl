@@ -95,11 +95,12 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, ba
             end
         end
     end
+    return length(input_trainopts)
 end
 
 function train_surfaces(input_trainopts::Vector{String}, base_surface_path, jacobian, outdir, batch_mode)
     input_trainopts = process_trainopts(input_trainopts)
-    train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, batch_mode)
+    return train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, batch_mode)
 end
         
 # Get trainopts into a consistent form
@@ -113,25 +114,46 @@ function process_trainopts(opts)
         opt_list = []
         for opt in trainopt
             if occursin("SHIFT", opt)
-                push!(opt_list, [])
+                push!(opt_list, [opt])
+            else
+                if opt_list[end][end] == "SHIFTLIST_FILE"
+                    opt_list = opt_list[1:end-1] # Remove previous element
+                    open(opt, "r") do io
+                        lines = readlines(io)
+                        for line in lines
+                            push!(opt_list, split(line))
+                        end
+                    end
+                else
+                    push!(opt_list[end], opt)
+                end
             end
-            push!(opt_list[end], opt)
         end
         for opt in opt_list
             is_mag = opt[1] == "MAGSHIFT"
             if is_mag
+                @debug "Found MAGSHIFT"
                 eq = mag_eq
             else
+                @debug "Found WAVESHIFT"
                 eq = wave_eq
             end
+            if opt[1] == "LAMSHIFT"
+                @debug "Updated LAMSHIFT to WAVESHIFT"
+                opt[1] = "WAVESHIFT"
+            end
             if opt[2] in eq
+                @debug "Updating $(opt[2]) to $(eq[1])"
                 opt[2] = eq[1]
                 opt[3] = uppercase(opt[3])
             end
             opt3 = split(opt[3], ',')
             opt4 = split(opt[4], ',')
             for i in 1:length(opt3)
-                elem["$(opt[1]) $(opt[2]) $(opt3[i])"] = opt4[i]
+                k = "$(opt[1]) $(opt[2]) $(opt3[i])"
+                v = opt4[i]
+                elem[k] = opt4[i]
+                @debug "$k = $v"
             end
         end
         push!(rtn, elem)

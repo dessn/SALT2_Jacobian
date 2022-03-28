@@ -272,7 +272,7 @@ function process_jacobian(toml::Dict, batch_mode::Bool, verbose::Bool)
         if isnothing(jacobian)
             @error "Can not approximate surfaces without a jacobian! Please define one via [ jacobian ]"
         end
-        surfaces_stage(toml["surfaces"], config, jacobian, batch_mode)
+        num_trainopts = surfaces_stage(toml["surfaces"], config, jacobian, batch_mode)
     end
 
     # Compare surfaces
@@ -286,6 +286,7 @@ function process_jacobian(toml::Dict, batch_mode::Bool, verbose::Bool)
     if "plot" in keys(toml)
         plot_stage(toml["plot"], config)
     end
+    return num_trainopts
 end
 
 function process_jacobian(toml_path::AbstractString, batch_mode::Bool, verbose::Bool)

@@ -101,10 +101,10 @@ try
         surfaces = Dict("trainopts" => trainopt, "base_surface" => base_surface)
         toml = Dict("toml_path" => output_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
     end
-        process_jacobian(toml, batch_mode, verbose)
+        num_trainopts = process_jacobian(toml, batch_mode, verbose)
         if !isnothing(yaml_path)
             open(yaml_path, "w") do io
-                write(io, "ABORT_IF_ZERO: 1")
+                write(io, "ABORT_IF_ZERO: 1\nNUM_TRAINOPTS: $num_trainopts")
             end
         end
 catch e
