@@ -245,6 +245,7 @@ end
 function process_jacobian(toml::Dict, batch_mode::Bool, verbose::Bool)
     setup_global_config!(toml)
     config = toml["global"]
+    num_trainopts = 0
     
     # Ensure all path's exist
     if !isdir(config["base_path"])

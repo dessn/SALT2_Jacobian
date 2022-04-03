@@ -90,8 +90,11 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, ba
             compress(trainopt_dir, destination_dir) 
         else
             destination_dir = outdir 
+            allowed_files = ["salt2_color_correction.dat.gz", "salt2_lc_dispersion_scaling.dat.gz", "salt2_lc_relative_variance_1.dat.gz", "salt2_spec_variance_1.dat.gz", "salt2_color_dispersion.dat.gz", "salt2_lc_relative_covariance_01.dat.gz", "salt2_spec_covariance_01.dat.gz", "salt2_template_0.dat.gz", "SALT2.INFO", "salt2_lc_relative_variance_0.dat.gz", "salt2_spec_variance_0.dat.gz", "salt2_template_1.dat.gz"]
             for file in readdir(trainopt_dir)
-                cp(joinpath(trainopt_dir, file), joinpath(destination_dir, file), force=true)
+                if file in allowed_files
+                    cp(joinpath(trainopt_dir, file), joinpath(destination_dir, file), force=true)
+                end
             end
         end
     end
