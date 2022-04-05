@@ -127,17 +127,18 @@ function Bspline3(t, i)
 end
 
 function get_spline(surface::SurfaceModule.Surface, ind::Int64)
-    n_points = surface.spline.components[ind].n_epochs * surface.spline.components[ind].n_wavelengths
+    components = surface.spline.components[ind]
+    n_points = components.n_epochs * components.n_wavelengths 
     λ = collect(2000:10:9210)[1:end-1]
     flux = Float64[]
     for w in λ
         val = 0
         for i in 1:n_points
             index_phase, index_wave = split_index(i, surface)
-            reduced_phase = reducedEpoch(surface.spline.components[1].phase_start, surface.spline.components[1].phase_end, 1.0)
-            reduced_wave = reducedLambda(surface.spline.components[1].wave_start, surface.spline.components[1].wave_end, w)
+            reduced_phase = reducedEpoch(components.phase_start, components.phase_end, 1.0)
+            reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
             interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
-            val += interp * surface.spline.components[1].values[i]
+            val += interp * components.values[i]
         end
         push!(flux, val)
     end
@@ -183,7 +184,7 @@ function plot_comparison!(gax, surface1::SurfaceModule.Surface, surface2::Surfac
     s1 = @. flux2_1 - flux1_1
     lines!(ax_1, λ1_1, s1)
     λ1_2, flux1_2 = get_spline(surface1, 2)
-    λ2_2, flux2_2 = get_spline(surface1, 2)
+    λ2_2, flux2_2 = get_spline(surface2, 2)
     s2 = @. flux2_2 - flux1_2
     lines!(ax_2, λ1_2, s2)
     λ1_c, A_λ1, A_λ1_σ_plus, A_λ1_σ_minus = get_colour_law(surface1)
