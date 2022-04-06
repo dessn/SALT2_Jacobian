@@ -216,7 +216,7 @@ function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Flo
     reduced_phase = reducedEpoch(components.phase_start, components.phase_end, phase)
     n_points = components.n_epochs * components.n_wavelengths 
     λ = collect(2000:5:9210)[1:end-1]
-    flux = zeros(length(λ))
+    flux = Vector{Float64}(undef, length(λ))
     Threads.@threads for (i, w) in collect(enumerate(λ))
         reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
         Threads.@threads for j in 1:n_points
