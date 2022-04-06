@@ -10,6 +10,8 @@ using ..Tools
 
 # Exports
 export Surface
+export get_spline
+export get_colour_law
 
 struct ColourLaw
     a::Vector{Float64} # Colour law components
@@ -101,6 +103,129 @@ function Surface(name, trainopt, surface_path::AbstractString)
     raw_spline = [line for line in raw_spline if length(split(line))!=0]
     spl = Spline(raw_spline)
     return Surface(name, trainopt, c_law, c_law_err, spl)
+end
+
+function reduced_lambda(λ)
+    wave_B = 4302.57
+    wave_V = 5428.55
+    return @. (λ-wave_B) / (wave_V - wave_B)
+end
+
+function derivative(α, surface, r_λ)
+    for (e, a) in enumerate(surface.colour_law.a)
+        α += (e + 1) * a * (r_λ ^ e)
+    end
+    return α
+end
+
+function c_law(α, surface, r_λ)
+    d = α * r_λ
+    for (e, a) in enumerate(surface.colour_law.a)
+        d += a * (r_λ ^ (e + 1))
+    end
+    return d
+end
+
+function get_colour_law(surface::SurfaceModule.Surface)
+    constant = 0.4 * log(10)
+    λ_min = 2800
+    λ_max = 7000
+    r_λ_min = reduced_lambda(λ_min)
+    r_λ_max = reduced_lambda(λ_max)
+
+    λ = collect(λ_min:λ_max)
+    r_λ = reduced_lambda(λ)
+
+    α = 1
+
+    for a in surface.colour_law.a
+        α -= a
+    end
+
+    p_derivative_min = derivative(α, surface, r_λ_min)
+    p_derivative_max = derivative(α, surface, r_λ_max)
+
+    p_r_λ_min = c_law(α, surface, r_λ_min)
+    p_r_λ_max = c_law(α, surface, r_λ_max)
+
+    λ = collect(2000:10:9210)[1:end-1]
+    r_λ = reduced_lambda(λ)
+    p = zeros(length(r_λ))
+
+    for (i, r) in enumerate(r_λ)
+        if r < r_λ_min
+            p[i] = @. p_r_λ_min + p_derivative_min * (r - r_λ_min)
+        elseif r > r_λ_max
+            p[i] = @. p_r_λ_max + p_derivative_max * (r - r_λ_max)
+        else
+            p[i] = c_law(α, surface, r)
+        end
+    end
+
+    C = 0.1
+
+    A_λ = @. -p * C * constant
+    A_λ_σ_plus = @. -(p + surface.colour_law_err.σ) * C * constant
+    A_λ_σ_minus = @. -(p - surface.colour_law_err.σ) * C * constant
+    return (λ, A_λ, A_λ_σ_plus, A_λ_σ_minus)
+end
+
+function split_index(index, surface::SurfaceModule.Surface)
+    index_phase = index % surface.spline.components[1].n_epochs
+    index_wave = floor(index / surface.spline.components[1].n_epochs)
+    return index_phase, index_wave
+end
+
+function phase_func(phase)
+    return (-1.0 * (0.045 * phase) ^ 3 + phase + 6. * (1 / (1. + exp(-0.5 * (phase + 18))) + 1 / (1. + exp(-0.3 * (phase))) + 1 / (1. + exp(-0.3 * (phase - 20)))))
+end
+
+function reducedEpoch(phase_min, phase_max, phase)
+    phase_func_min = phase_func(phase_min)
+    phase_func_max = phase_func(phase_max)
+    pedestal = 0
+    number_of_parameters_for_phase = 14
+    return ((phase_func(phase) - phase_func_min) / (phase_func_max - phase_func_min) * (number_of_parameters_for_phase) + pedestal)
+end
+
+function lambda_func(λ)
+    return (1 / (1 + exp(-(λ - 4000) / 2000)))
+end
+
+function reducedLambda(λ_min, λ_max, λ)
+    lambda_func_min = lambda_func(λ_min)
+    lambda_func_max = lambda_func(λ_max)
+    pedestal = 0
+    number_of_parameters_for_lambda = 100
+    return ((lambda_func(λ) - lambda_func_min) / (lambda_func_max - lambda_func_min) * (number_of_parameters_for_lambda) + pedestal)
+end
+
+function Bspline3(t, i)
+    if (t < i) || (t > i+3)
+        return 0
+    elseif t < i + 1
+        return 0.5 * (t-i)^2
+    elseif t < i+2
+        return 0.5 * ((i + 2 - t) * (t - i) + (t - i - 1) * (i + 3 - t))
+    end
+    return 0.5 * (i + 3 - t) ^ 2
+end
+
+function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Float64)
+    components = surface.spline.components[component]
+    reduced_phase = reducedEpoch(components.phase_start, components.phase_end, phase)
+    n_points = components.n_epochs * components.n_wavelengths 
+    λ = collect(2000:5:9210)[1:end-1]
+    flux = zeros(length(λ))
+    Threads.@threads for (i, w) in collect(enumerate(λ))
+        reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
+        Threads.@threads for j in 1:n_points
+            index_phase, index_wave = split_index(j, surface)
+            interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
+            flux[i] += interp * components.values[j]
+        end
+    end
+    return (λ, flux)
 end
 
 end

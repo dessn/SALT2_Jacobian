@@ -25,8 +25,7 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, ba
     base_colour_law = base_surface.colour_law.a
     
     # For each trainopt, train a surface
-    #for (i, trainopt) in ProgressBar(collect(enumerate(input_trainopts)))
-    for (i, trainopt) in collect(enumerate(input_trainopts))
+    Threads.@threads for (i, trainopt) in collect(enumerate(input_trainopts))
         spline_1_offset = zeros(length(base_spline_1))
         spline_2_offset = zeros(length(base_spline_2))
         colour_law_offset = zeros(length(base_colour_law))
@@ -82,6 +81,35 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, ba
         open(GzipCompressorStream, colour_law_file, "w") do io
             write(io, new_colour_law_file)
         end
+
+        # Create surface
+        surface = Surface("TRAINOPT$(lpad(i,3,"0"))", "", trainopt_dir)
+
+        # Overwrite template files
+        phase_start = surface.spline.components[1].phase_start
+        phase_end = surface.spline.components[1].phase_end
+        phases = collect(phase_start:1:phase_end)
+        template_0 = ["" for i in phases]
+        template_1 = ["" for i in phases]
+        template = [template_0, template_1]
+        Threads.@threads for (i, p) in collect(enumerate(phases))
+            for (j, t) in enumerate(template)
+                λ, flux = get_spline(surface, j, p)
+                t[i] *= join(["$p $(λ[k]) $f" for (k, f) in enumerate(flux)], "\n")
+            end
+        end
+        template_0 = join(template_0, "\n")
+        template_0_file = joinpath(trainopt_dir, "salt2_template_0.dat.gz")
+        open(GzipCompressorStream, template_0_file, "w") do io
+            write(io, template_0)
+        end
+
+        template_1 = join(template_1, "\n")
+        template_1_file = joinpath(trainopt_dir, "salt2_template_1.dat.gz")
+        open(GzipCompressorStream, template_1_file, "w") do io
+            write(io, template_1)
+        end
+
 
         # Save and compress final surface
         if !batch_mode

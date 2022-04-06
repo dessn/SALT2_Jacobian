@@ -74,45 +74,49 @@ verbose = args["verbose"]
 yaml_path = args["yaml"]
 batch_mode = args["batch"]
 # If you specify a toml, just use that
-try
-    if !isnothing(args["input"])
-        toml = abspath(args["input"])
-    # Otherwise, we build our own dictionary from the given parameters
-    else
-        logging = !batch_mode 
-        jacobian_path = args["jacobian"]
-        if isnothing(jacobian_path)
-            error("You must specify a jacobian path via --jacobian/-j if running from the command line (or from submit_batch)")
+
+function main()
+    try
+        if !isnothing(args["input"])
+            toml = abspath(args["input"])
+        # Otherwise, we build our own dictionary from the given parameters
+        else
+            logging = !batch_mode 
+            jacobian_path = args["jacobian"]
+            if isnothing(jacobian_path)
+                error("You must specify a jacobian path via --jacobian/-j if running from the command line (or from submit_batch)")
+            end
+            base_surface = args["base"]
+            if isnothing(base_surface)
+                error("You must specify a base surface via --base/-b if running from the command line (or from submit_batch)")
+            end
+            output_path = args["output"]
+            if isnothing(output_path)
+                error("You must specify an output directory via --output/-o if running from the command line (or from submit_batch)")
+            end
+            trainopt = args["trainopt"]
+            if isnothing(trainopt)
+                error("You must specify a trainopt via --trainopt/-t if running from the command line (or from submit_batch)")
+            end
+            global_dict = Dict("base_path" => "./", "output_path" => output_path, "logging" => logging)
+            jacobian = Dict("path" => jacobian_path)
+            surfaces = Dict("trainopts" => trainopt, "base_surface" => base_surface)
+            toml = Dict("toml_path" => output_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
         end
-        base_surface = args["base"]
-        if isnothing(base_surface)
-            error("You must specify a base surface via --base/-b if running from the command line (or from submit_batch)")
-        end
-        output_path = args["output"]
-        if isnothing(output_path)
-            error("You must specify an output directory via --output/-o if running from the command line (or from submit_batch)")
-        end
-        trainopt = args["trainopt"]
-        if isnothing(trainopt)
-            error("You must specify a trainopt via --trainopt/-t if running from the command line (or from submit_batch)")
-        end
-        global_dict = Dict("base_path" => "./", "output_path" => output_path, "logging" => logging)
-        jacobian = Dict("path" => jacobian_path)
-        surfaces = Dict("trainopts" => trainopt, "base_surface" => base_surface)
-        toml = Dict("toml_path" => output_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
-    end
-        num_trainopts = process_jacobian(toml, batch_mode, verbose)
+            num_trainopts = process_jacobian(toml, batch_mode, verbose)
+            if !isnothing(yaml_path)
+                open(yaml_path, "w") do io
+                    write(io, "ABORT_IF_ZERO: 1\nNUM_TRAINOPTS: $num_trainopts")
+                end
+            end
+    catch e
         if !isnothing(yaml_path)
             open(yaml_path, "w") do io
-                write(io, "ABORT_IF_ZERO: 1\nNUM_TRAINOPTS: $num_trainopts")
+                write(io, "ABORT_IF_ZERO: 0\nERROR: $e")
             end
         end
-catch e
-    if !isnothing(yaml_path)
-        open(yaml_path, "w") do io
-            write(io, "ABORT_IF_ZERO: 0\nERROR: $e")
-        end
+        throw(e)
     end
-    throw(e)
 end
 
+main()
