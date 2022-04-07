@@ -25,7 +25,7 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, ba
     base_colour_law = base_surface.colour_law.a
     
     # For each trainopt, train a surface
-    Threads.@threads for (i, trainopt) in collect(enumerate(input_trainopts))
+    for (i, trainopt) in collect(enumerate(input_trainopts))
         spline_1_offset = zeros(length(base_spline_1))
         spline_2_offset = zeros(length(base_spline_2))
         colour_law_offset = zeros(length(base_colour_law))

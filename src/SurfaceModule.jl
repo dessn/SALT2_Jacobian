@@ -217,9 +217,9 @@ function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Flo
     n_points = components.n_epochs * components.n_wavelengths 
     λ = collect(2000:5:9210)[1:end-1]
     flux = Vector{Float64}(undef, length(λ))
-    Threads.@threads for (i, w) in collect(enumerate(λ))
+    for (i, w) in collect(enumerate(λ))
         reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
-        Threads.@threads for j in 1:n_points
+        for j in 1:n_points
             index_phase, index_wave = split_index(j, surface)
             interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
             flux[i] += interp * components.values[j]
