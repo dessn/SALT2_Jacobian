@@ -38,20 +38,20 @@ function ColourLawErr(raw::Vector{String})
 end
 
 struct Component
-    basis
-    n_epochs
-    n_wavelengths
-    phase_start
-    phase_end
-    wave_start
-    wave_end
-    values
+    basis::String
+    n_epochs::Float64
+    n_wavelengths::Float64
+    phase_start::Float64
+    phase_end::Float64
+    wave_start::Float64
+    wave_end::Float64
+    values::Vector{Float64}
 end
 
 function Component(comp)
     basis = comp[1]
-    n_epochs = parse(Int64, comp[2])
-    n_wavelengths = parse(Int64, comp[3])
+    n_epochs = parse(Float64, comp[2])
+    n_wavelengths = parse(Float64, comp[3])
     phase_start = parse(Float64, comp[4])
     phase_end = parse(Float64, comp[5])
     wave_start = parse(Float64, comp[6])
@@ -171,8 +171,9 @@ function get_colour_law(surface::SurfaceModule.Surface)
 end
 
 function split_index(index, surface::SurfaceModule.Surface)
-    index_phase = index % surface.spline.components[1].n_epochs
-    index_wave = floor(index / surface.spline.components[1].n_epochs)
+    n_epochs::Float64 = surface.spline.components[1].n_epochs
+    index_phase::Float64 = index % n_epochs 
+    index_wave::Float64 = floor(index / n_epochs)
     return index_phase, index_wave
 end
 
@@ -202,7 +203,7 @@ end
 
 function Bspline3(t, i)
     if (t < i) || (t > i+3)
-        return 0
+        return 0.0
     elseif t < i + 1
         return 0.5 * (t-i)^2
     elseif t < i+2
@@ -214,15 +215,15 @@ end
 function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Float64)
     components = surface.spline.components[component]
     reduced_phase = reducedEpoch(components.phase_start, components.phase_end, phase)
-    n_points = components.n_epochs * components.n_wavelengths 
+    n_points::Int64 = components.n_epochs * components.n_wavelengths
     λ = collect(2000:5:9210)[1:end-1]
     flux = Vector{Float64}(undef, length(λ))
-    for (i, w) in collect(enumerate(λ))
+    for (i, w) in enumerate(λ)
         reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
-        for j in 1:n_points
+        @simd for j in 1:n_points
             index_phase, index_wave = split_index(j, surface)
             interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
-            flux[i] += interp * components.values[j]
+            @inbounds flux[i] += interp * components.values[j]
         end
     end
     return (λ, flux)

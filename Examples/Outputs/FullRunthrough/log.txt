@@ -3,6 +3,13 @@ Main.SALT2_Jacobian | [Info] Generating Jacobian
 Main.SALT2_Jacobian | [Info] Training jacobian from /home/patricka/.julia/dev/SALT2_Jacobian/Examples/TrainedSurfaces/OUTPUT_TRAIN_T21_suite
 Main.SALT2_Jacobian | [Info] Saving to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/FullRunthrough/jacobian.fits
 Main.SALT2_Jacobian | [Info] Approximating Surfaces
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 1
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 2
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 3
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 4
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 5
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 6
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 7
 Main.SALT2_Jacobian | [Info] Comparing surfaces
 Main.SALT2_Jacobian | [Info] Comparison:
 ┌───────────────────────────────┬───────────────────────────┬─────────────┬────────────┬────────────┐
