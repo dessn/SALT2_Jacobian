@@ -1,6 +1,0 @@
-language: julia
-notifications:
-  email: false
-julia:
-  - 0.7
-  - 1.0

@@ -1,9 +1,0 @@
-*.jl.cov
-*.jl.*.cov
-*.jl.mem
-Manifest.toml
-
-*.cov
-*.mem
-
-dev/ 

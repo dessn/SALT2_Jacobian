@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --replace-needed libz.so.1 libz.so.1 bin/mogrify`

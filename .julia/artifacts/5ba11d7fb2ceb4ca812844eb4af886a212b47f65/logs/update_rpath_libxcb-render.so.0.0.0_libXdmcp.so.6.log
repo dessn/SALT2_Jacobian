@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --set-rpath '/workspace/destdir/lib:$ORIGIN' lib/libxcb-render.so.0.0.0`

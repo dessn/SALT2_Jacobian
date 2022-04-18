@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --replace-needed libXau.so.6 libXau.so.6 lib/libxcb-damage.so.0.0.0`

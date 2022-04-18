@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --replace-needed libzstd.so.1 libzstd.so.1 bin/montage`
