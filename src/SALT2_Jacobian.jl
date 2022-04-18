@@ -260,6 +260,7 @@ function process_jacobian(toml::Dict, batch_mode::Bool, verbose::Bool)
     end
     @debug "Base path: $(config["base_path"])"
     @debug "Output path: $(config["output_path"])"
+    @info "Running with $(Threads.nthreads()) threads"
 
     # Create / load jacobian
     if "jacobian" in keys(toml)
