@@ -26,6 +26,7 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, ba
     
     # For each trainopt, train a surface
     for (i, trainopt) in collect(enumerate(input_trainopts))
+        @info "Training trainopt $i"
         spline_1_offset = zeros(length(base_spline_1))
         spline_2_offset = zeros(length(base_spline_2))
         colour_law_offset = zeros(length(base_colour_law))
@@ -46,7 +47,6 @@ function train_surfaces(input_trainopts, base_surface_path, jacobian, outdir, ba
         new_spline_1 = base_spline_1 + spline_1_offset
         new_spline_2 = base_spline_2 + spline_2_offset
         new_colour_law = base_colour_law + colour_law_offset
-        
 
         # Copy TRAINOPT000 files over
         trainopt_dir_orig = uncompress(base_surface_path)
