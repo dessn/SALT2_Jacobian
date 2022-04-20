@@ -72,11 +72,11 @@ function Spline(raw)
 end
 
 struct Surface
-    name
-    trainopt
-    colour_law
-    colour_law_err
-    spline
+    name::String
+    trainopt::String
+    colour_law::ColourLaw
+    colour_law_err::ColourLawErr
+    spline::Spline
 end
 
 function Surface(name, trainopt, surface_path::AbstractString)
@@ -184,21 +184,17 @@ end
 function reducedEpoch(phase_min, phase_max, phase)
     phase_func_min = phase_func(phase_min)
     phase_func_max = phase_func(phase_max)
-    pedestal = 0
     number_of_parameters_for_phase = 14
-    return ((phase_func(phase) - phase_func_min) / (phase_func_max - phase_func_min) * (number_of_parameters_for_phase) + pedestal)
+    return (phase_func(phase) - phase_func_min) / ((phase_func_max - phase_func_min) * number_of_parameters_for_phase)
 end
 
 function lambda_func(λ)
     return (1 / (1 + exp(-(λ - 4000) / 2000)))
 end
 
-function reducedLambda(λ_min, λ_max, λ)
-    lambda_func_min = lambda_func(λ_min)
-    lambda_func_max = lambda_func(λ_max)
-    pedestal = 0
+function reducedLambda(lambda_func_min, lambda_func_max, λ)
     number_of_parameters_for_lambda = 100
-    return ((lambda_func(λ) - lambda_func_min) / (lambda_func_max - lambda_func_min) * (number_of_parameters_for_lambda) + pedestal)
+    return (lambda_func(λ) - lambda_func_min) / ((lambda_func_max - lambda_func_min) * number_of_parameters_for_lambda)
 end
 
 function Bspline3(t, i)
@@ -214,6 +210,8 @@ end
 
 function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Float64)
     components = surface.spline.components[component]
+    lambda_func_min = lambda_func(components.wave_start)
+    lambda_func_max = lambda_func(components.wave_end)
     reduced_phase = reducedEpoch(components.phase_start, components.phase_end, phase)
     n_points::Int64 = components.n_epochs * components.n_wavelengths
     λ = collect(2000:5:9210)[1:end-1]
@@ -222,7 +220,7 @@ function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Flo
     else
         flux = Vector{Float64}(undef, length(λ))
         for (i, w) in enumerate(λ)
-            reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
+            reduced_wave = reducedLambda(lambda_func_min, lambda_func_max, w)
             flux_val = 0.0
             @simd for j in 1:n_points
                 index_phase, index_wave = split_index(j, surface)
