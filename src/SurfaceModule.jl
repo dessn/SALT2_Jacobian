@@ -217,13 +217,20 @@ function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Flo
     reduced_phase = reducedEpoch(components.phase_start, components.phase_end, phase)
     n_points::Int64 = components.n_epochs * components.n_wavelengths
     λ = collect(2000:5:9210)[1:end-1]
-    flux = Vector{Float64}(undef, length(λ))
-    for (i, w) in enumerate(λ)
-        reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
-        @simd for j in 1:n_points
-            index_phase, index_wave = split_index(j, surface)
-            interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
-            @inbounds flux[i] += interp * components.values[j]
+    if phase <= -20
+        flux = zeros(length(λ))
+    else
+        flux = Vector{Float64}(undef, length(λ))
+        for (i, w) in enumerate(λ)
+            reduced_wave = reducedLambda(components.wave_start, components.wave_end, w)
+            @simd for j in 1:n_points
+                index_phase, index_wave = split_index(j, surface)
+                interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
+                @inbounds flux[i] += interp * components.values[j]
+            end
+            if flux[i] <= 1e-20
+                flux[i] = 0
+            end
         end
     end
     return (λ, flux)
