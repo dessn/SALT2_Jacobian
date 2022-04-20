@@ -185,7 +185,7 @@ function reducedEpoch(phase_min, phase_max, phase)
     phase_func_min = phase_func(phase_min)
     phase_func_max = phase_func(phase_max)
     number_of_parameters_for_phase = 14
-    return (phase_func(phase) - phase_func_min) / ((phase_func_max - phase_func_min) * number_of_parameters_for_phase)
+    return number_of_parameters_for_phase * (phase_func(phase) - phase_func_min) / (phase_func_max - phase_func_min)
 end
 
 function lambda_func(λ)
@@ -194,7 +194,7 @@ end
 
 function reducedLambda(lambda_func_min, lambda_func_max, λ)
     number_of_parameters_for_lambda = 100
-    return (lambda_func(λ) - lambda_func_min) / ((lambda_func_max - lambda_func_min) * number_of_parameters_for_lambda)
+    return number_of_parameters_for_lambda * (lambda_func(λ) - lambda_func_min) / (lambda_func_max - lambda_func_min)
 end
 
 function Bspline3(t, i)
@@ -227,7 +227,7 @@ function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Flo
                 interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
                 @inbounds flux_val += interp * components.values[j]
             end
-            if flux_val <= 1e-20
+            if abs(flux_val) <= 1e-20
                 flux_val = 0.0
             end
             flux[i] = flux_val
