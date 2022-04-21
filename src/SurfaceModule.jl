@@ -214,7 +214,7 @@ function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Flo
     lambda_func_max = lambda_func(components.wave_end)
     reduced_phase = reducedEpoch(components.phase_start, components.phase_end, phase)
     n_points::Int64 = components.n_epochs * components.n_wavelengths
-    λ = collect(2000:5:9210)[1:end-1]
+    λ = collect(2000:5:9200)
     if phase <= -20.0
         flux = zeros(length(λ))
     else
