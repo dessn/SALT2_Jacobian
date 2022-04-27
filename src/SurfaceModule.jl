@@ -227,7 +227,7 @@ function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Flo
                 interp = Bspline3(reduced_phase, index_phase) * Bspline3(reduced_wave, index_wave)
                 @inbounds flux_val += interp * components.values[j]
             end
-            if abs(flux_val) <= 1e-20
+            if abs(flux_val) <= 1e-25
                 flux_val = 0.0
             end
             flux[i] = flux_val
