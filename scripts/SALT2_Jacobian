@@ -98,10 +98,10 @@ function main()
             if isnothing(trainopt)
                 error("You must specify a trainopt via --trainopt/-t if running from the command line (or from submit_batch)")
             end
-            global_dict = Dict("base_path" => "./", "output_path" => output_path, "logging" => logging)
+            global_dict = Dict("base_path" => "./", "output_path" => output_path, "logging" => logging, "toml_path" => "./")
             jacobian = Dict("path" => jacobian_path)
             surfaces = Dict("trainopts" => trainopt, "base_surface" => base_surface)
-            toml = Dict("toml_path" => output_path, "global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
+            toml = Dict("global" => global_dict, "jacobian" => jacobian, "surfaces" => surfaces)
         end
             num_trainopts = process_jacobian(toml, batch_mode, verbose)
             if !isnothing(yaml_path)
