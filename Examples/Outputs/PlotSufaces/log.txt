@@ -1,3 +1,0 @@
-Main.SALT2_Jacobian | [Info] Logging to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/PlotSufaces/log.txt
-Main.SALT2_Jacobian | [Info] Plotting surfaces
-Main.SALT2_Jacobian | [Info] Plotting residuals
