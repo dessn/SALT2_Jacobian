@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --replace-needed libjpeg.so.62 libjpeg.so.62 lib/libMagickCore-6.Q16.so.6.0.0`

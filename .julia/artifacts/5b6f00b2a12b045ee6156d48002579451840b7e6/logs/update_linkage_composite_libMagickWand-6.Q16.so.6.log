@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --replace-needed libMagickWand-6.Q16.so.6 libMagickWand-6.Q16.so.6 bin/composite`

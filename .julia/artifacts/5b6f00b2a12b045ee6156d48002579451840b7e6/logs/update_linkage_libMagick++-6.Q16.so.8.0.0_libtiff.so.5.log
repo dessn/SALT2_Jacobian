@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --replace-needed libtiff.so.5 libtiff.so.5 lib/libMagick++-6.Q16.so.8.0.0`

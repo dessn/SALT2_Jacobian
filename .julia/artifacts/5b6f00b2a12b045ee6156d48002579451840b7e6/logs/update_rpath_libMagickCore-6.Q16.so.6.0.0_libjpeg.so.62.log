@@ -1,1 +1,0 @@
-`/usr/bin/patchelf --set-rpath '/workspace/destdir/lib:$ORIGIN' lib/libMagickCore-6.Q16.so.6.0.0`
