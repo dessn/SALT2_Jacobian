@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libXau.so.6 libXau.so.6 lib/libxcb-randr.so.0.1.0`

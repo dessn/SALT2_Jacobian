@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --set-rpath '/workspace/destdir/lib:$ORIGIN' lib/libxcb-shape.so.0.0.0`

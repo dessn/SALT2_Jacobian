@@ -1,0 +1,143 @@
+[[libfdk_aac]]
+arch = "aarch64"
+git-tree-sha1 = "fc7ba632b72ce7d852c1924aa2bbfe244a71c780"
+os = "macos"
+
+    [[libfdk_aac.download]]
+    sha256 = "8020844d278fe3aef4c43469a8724ead9cc3047afe03f52ee31ab9ada8134734"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.aarch64-apple-darwin.tar.gz"
+[[libfdk_aac]]
+arch = "aarch64"
+git-tree-sha1 = "d1ac3205cbcf24c6f0a18d23e2fbb48878ae7a67"
+libc = "glibc"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "057678e7f486e761861e87afdf6410036faca8383d6e2be1b379c4459fca5fc1"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.aarch64-linux-gnu.tar.gz"
+[[libfdk_aac]]
+arch = "aarch64"
+git-tree-sha1 = "299b1cff3a1652709b8d431744824e3763953dfb"
+libc = "musl"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "8c1988a028ec609b2632a89cb691ea70d8e3184732fff1b7ad40ed0df26713c4"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.aarch64-linux-musl.tar.gz"
+[[libfdk_aac]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "923cc497a5cc6ad9b22bb4b47277d4f13111c83e"
+libc = "glibc"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "f7cbba28a23160f49dff2fdfe096e4c246537db3545d4133af86d360465fed65"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.armv6l-linux-gnueabihf.tar.gz"
+[[libfdk_aac]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "3d8d90cd0b2fa8a9b059b4f6c5ce7da61ba9a94b"
+libc = "musl"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "b65042fb3494b1b520e6668ee5be3edcf4b201dae4b30039632b058d4d11749d"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.armv6l-linux-musleabihf.tar.gz"
+[[libfdk_aac]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "f76256ac85554442b70686da88810afb0b8abc95"
+libc = "glibc"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "806a4d8535cf8073297c2e02c97e490c57d8e93e66b55a0698fa1e81061827ba"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.armv7l-linux-gnueabihf.tar.gz"
+[[libfdk_aac]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "6ac8eb0c4f4fbfda852567ef7abc45ca754de374"
+libc = "musl"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "8ef02b5921916dc107f426497a21d0e062f625f43ad2712936bc0be77f6a4be4"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.armv7l-linux-musleabihf.tar.gz"
+[[libfdk_aac]]
+arch = "i686"
+git-tree-sha1 = "78b1b250238a3a34a4de4adbd3a1e3e44b2708d3"
+libc = "glibc"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "ff70f600e12fa619fec4f598c1d254de0d6057eda0ebe9904b057cd615f1c5f7"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.i686-linux-gnu.tar.gz"
+[[libfdk_aac]]
+arch = "i686"
+git-tree-sha1 = "5b45895cb96906dec3181b8c761688c087eaff1b"
+libc = "musl"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "7d7437adce29dbd9d0e0defaa6022660e63d9cb78cabd4e48dfe064a3d6e7da6"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.i686-linux-musl.tar.gz"
+[[libfdk_aac]]
+arch = "i686"
+git-tree-sha1 = "7b4d54220c631ff046f12abcb94354029c90cc02"
+os = "windows"
+
+    [[libfdk_aac.download]]
+    sha256 = "3c46a8680abb4a0ca8971bfffa549e0f73a962a85690320452c724c6891dc992"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.i686-w64-mingw32.tar.gz"
+[[libfdk_aac]]
+arch = "powerpc64le"
+git-tree-sha1 = "d7312e2df59b1ab2aa189738610d89c26d90dbdc"
+libc = "glibc"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "edc524fb597aebe8d4e239baad0bcc3fef23113dbabb99f39e44c00be22a2fe2"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.powerpc64le-linux-gnu.tar.gz"
+[[libfdk_aac]]
+arch = "x86_64"
+git-tree-sha1 = "d4387ba5551f47f3733c2b041a7745c29b35c26e"
+os = "macos"
+
+    [[libfdk_aac.download]]
+    sha256 = "2d3df00e37be36cd98ac33668867792b4b78d71f5565b4c5182f9e7a1fb80d5a"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.x86_64-apple-darwin.tar.gz"
+[[libfdk_aac]]
+arch = "x86_64"
+git-tree-sha1 = "cc415631aeb190b075329ce756f690a90e1f873b"
+libc = "glibc"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "7180dacdb5abb7103331f9fec4b0fe0d1a67857075a3680898ac9f8e75895617"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.x86_64-linux-gnu.tar.gz"
+[[libfdk_aac]]
+arch = "x86_64"
+git-tree-sha1 = "afee313f3e09a3f1c3960a08c8853b7ae82f192b"
+libc = "musl"
+os = "linux"
+
+    [[libfdk_aac.download]]
+    sha256 = "cc36906648c94d4e00c395977859644ec811e947cae21a6589cf8456da76897f"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.x86_64-linux-musl.tar.gz"
+[[libfdk_aac]]
+arch = "x86_64"
+git-tree-sha1 = "53e466c61cfb0e811df2bf6660b45ae5f5e8f56e"
+os = "freebsd"
+
+    [[libfdk_aac.download]]
+    sha256 = "df980d33523500221e4cdc27e6d91d40500344b41ae9677b8d590781b9453c8c"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.x86_64-unknown-freebsd.tar.gz"
+[[libfdk_aac]]
+arch = "x86_64"
+git-tree-sha1 = "1b573c0aaf4a3a73f296a61c2cacbee17ac0d4e3"
+os = "windows"
+
+    [[libfdk_aac.download]]
+    sha256 = "189bb3e323502190f9e4ad06521192b5dd02f39903c0a8546910b6851dfd5392"
+    url = "https://github.com/JuliaBinaryWrappers/libfdk_aac_jll.jl/releases/download/libfdk_aac-v2.0.2+0/libfdk_aac.v2.0.2.x86_64-w64-mingw32.tar.gz"

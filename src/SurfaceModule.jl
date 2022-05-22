@@ -178,34 +178,34 @@ function split_index(index, surface::SurfaceModule.Surface)
 end
 
 function phase_func(phase)
-    return (-1.0 * (0.045 * phase) ^ 3 + phase + 6. * (1 / (1. + exp(-0.5 * (phase + 18))) + 1 / (1. + exp(-0.3 * (phase))) + 1 / (1. + exp(-0.3 * (phase - 20)))))
+    return (-1.0 * (0.045 * phase) ^ 3.0 + phase + 6.0 * (1.0 / (1.0 + exp(-0.5 * (phase + 18.0))) + 1.0 / (1.0 + exp(-0.3 * (phase))) + 1.0 / (1.0 + exp(-0.3 * (phase - 20.0)))))
 end
 
 function reducedEpoch(phase_min, phase_max, phase)
     phase_func_min = phase_func(phase_min)
     phase_func_max = phase_func(phase_max)
-    number_of_parameters_for_phase = 14
+    number_of_parameters_for_phase = 14.0
     return number_of_parameters_for_phase * (phase_func(phase) - phase_func_min) / (phase_func_max - phase_func_min)
 end
 
 function lambda_func(λ)
-    return (1 / (1 + exp(-(λ - 4000) / 2000)))
+    return (1.0 / (1.0 + exp(-(λ - 4000.0) / 2000.0)))
 end
 
 function reducedLambda(lambda_func_min, lambda_func_max, λ)
-    number_of_parameters_for_lambda = 100
+    number_of_parameters_for_lambda = 100.0
     return number_of_parameters_for_lambda * (lambda_func(λ) - lambda_func_min) / (lambda_func_max - lambda_func_min)
 end
 
 function Bspline3(t, i)
-    if (t < i) || (t > i+3)
+    if (t < i) || (t > i + 3.0)
         return 0.0
-    elseif t < i + 1
-        return 0.5 * (t-i)^2
-    elseif t < i+2
-        return 0.5 * ((i + 2 - t) * (t - i) + (t - i - 1) * (i + 3 - t))
+    elseif t < i + 1.0
+        return 0.5 * (t-i)^2.0
+    elseif t < i+2.0
+        return 0.5 * ((i + 2.0 - t) * (t - i) + (t - i - 1.0) * (i + 3.0 - t))
     end
-    return 0.5 * (i + 3 - t) ^ 2
+    return 0.5 * (i + 3.0 - t) ^ 2.0
 end
 
 function get_spline(surface::SurfaceModule.Surface, component::Int64, phase::Float64)

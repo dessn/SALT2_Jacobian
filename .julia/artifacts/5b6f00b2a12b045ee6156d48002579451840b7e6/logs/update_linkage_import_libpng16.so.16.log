@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libpng16.so.16 libpng16.so.16 bin/import`

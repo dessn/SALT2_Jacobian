@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --set-rpath '/workspace/destdir/lib:$ORIGIN' lib/libxcb-sync.so.1.0.0`

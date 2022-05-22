@@ -1,0 +1,115 @@
+[[Imath]]
+arch = "aarch64"
+git-tree-sha1 = "4e5064d3b74684d69a25b8195aa72e8d2716652e"
+libc = "glibc"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "cef147e9463cca96ec28cb903ea7e5ceee6cd93252bfbc357ec64f0e3dd6490c"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.aarch64-linux-gnu.tar.gz"
+[[Imath]]
+arch = "aarch64"
+git-tree-sha1 = "18c5da14375eb8682f1145578fa6a578d0d54913"
+libc = "musl"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "ca683dfe436c3cf240dc90863577fc1298429189b6f3a2c1ba5a6fab4da57597"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.aarch64-linux-musl.tar.gz"
+[[Imath]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "7f76535ab692ff41522ae6d8a48e2650732951d5"
+libc = "glibc"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "5a3c4a32889d7f2c5596a726f5cd574856c31fa0bf927f8a7703f51282471eb0"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.armv7l-linux-gnueabihf.tar.gz"
+[[Imath]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "b2789f4eb1606ce3c38ce508496baa169cb26a14"
+libc = "musl"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "71dbab55ef9e5b69e3d0c2f19b5e1e2c67a84f298f934a6d406746eaa5168ceb"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.armv7l-linux-musleabihf.tar.gz"
+[[Imath]]
+arch = "i686"
+git-tree-sha1 = "6f8af888af79615604cb8fb05876c3588974a1ff"
+libc = "glibc"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "57f8cdd0773982389f9afd4d84faf08c09dfa14c3fb519ae6e7aa20012c54854"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.i686-linux-gnu.tar.gz"
+[[Imath]]
+arch = "i686"
+git-tree-sha1 = "fa45cd53a68bcfccae8c384ab4b62ca1a81c83bc"
+libc = "musl"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "7cb05c76c9b33227cb47fe02513eb77e906143bfc82582763eda76e52a0a85ad"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.i686-linux-musl.tar.gz"
+[[Imath]]
+arch = "i686"
+git-tree-sha1 = "6671309e31c8afc871ce96c0c9e3821df0fa3931"
+os = "windows"
+
+    [[Imath.download]]
+    sha256 = "9d18947d11adf8c484e9d75fcaef351cc0785fac33537db8812639cef1441fd8"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.i686-w64-mingw32.tar.gz"
+[[Imath]]
+arch = "powerpc64le"
+git-tree-sha1 = "a3a94b9f04a624a08de1fc6ff6ff916100585a48"
+libc = "glibc"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "f1a563e0c8fe794111b020478e8c668554f3626f99c6f3b74c9f894a0f45a292"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.powerpc64le-linux-gnu.tar.gz"
+[[Imath]]
+arch = "x86_64"
+git-tree-sha1 = "305cd68f391ebb7e23d2c825cf79a214b7a282cb"
+os = "macos"
+
+    [[Imath.download]]
+    sha256 = "1d855c064cd03fc4d03387feef5e893690349b568acb0fdfb23eb9a7a51e3fea"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.x86_64-apple-darwin.tar.gz"
+[[Imath]]
+arch = "x86_64"
+git-tree-sha1 = "2b20330db925ce814d030ae77534a655782e85a1"
+libc = "glibc"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "ad3ced58878c8edffd2458e3ad371a32334d5dd78612d0edb1302fdf5c0eb194"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.x86_64-linux-gnu.tar.gz"
+[[Imath]]
+arch = "x86_64"
+git-tree-sha1 = "d54dae3c7dcd97db43cb8c7770404dc121f118f0"
+libc = "musl"
+os = "linux"
+
+    [[Imath.download]]
+    sha256 = "6a44bbc1695724c431dde0e590811cbaf9e8e785bfe9f06ce3335db0dd43bef8"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.x86_64-linux-musl.tar.gz"
+[[Imath]]
+arch = "x86_64"
+git-tree-sha1 = "def9634a4e532f5333ae5a35938119dcace8167f"
+os = "freebsd"
+
+    [[Imath.download]]
+    sha256 = "3f23dcb0f99317dc89925f8bb7a2e8d7d2360a03bee94e9cc38e6c73f503a4f5"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.x86_64-unknown-freebsd.tar.gz"
+[[Imath]]
+arch = "x86_64"
+git-tree-sha1 = "75b97b11294031e9b841fd8777dc0bb3355eb2ad"
+os = "windows"
+
+    [[Imath.download]]
+    sha256 = "eeb781871ed3430087a4edd44860c14ad1e3d2d4408cde67fb782d729084b7af"
+    url = "https://github.com/JuliaBinaryWrappers/Imath_jll.jl/releases/download/Imath-v3.1.2+0/Imath.v3.1.2.x86_64-w64-mingw32.tar.gz"

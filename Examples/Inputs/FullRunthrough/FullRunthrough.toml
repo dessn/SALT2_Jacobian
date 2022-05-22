@@ -22,5 +22,5 @@ base_surface = "TrainedSurfaces/OUTPUT_TRAIN_T21_suite/TRAINOPT000.tar.gz"
 comparison_path = "TrainedSurfaces/OUTPUT_TRAIN_SALT2_train"
 comparison_name = "SALT2 Trained Surfaces"
 
-[ plot ]
+[[ plot ]]
 comparison_plot_path = "TrainedSurfaces/OUTPUT_TRAIN_SALT2_train"

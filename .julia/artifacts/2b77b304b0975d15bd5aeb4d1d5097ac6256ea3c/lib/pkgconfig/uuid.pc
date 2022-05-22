@@ -1,0 +1,11 @@
+prefix=/workspace/destdir
+exec_prefix=/workspace/destdir
+libdir=/workspace/destdir/lib
+includedir=/workspace/destdir/include
+
+Name: uuid
+Description: Universally unique id library
+Version: 2.36.0
+Requires:
+Cflags: -I${includedir}/uuid
+Libs: -L${libdir} -luuid

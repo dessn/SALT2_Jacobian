@@ -1,0 +1,143 @@
+[[libvorbis]]
+arch = "aarch64"
+git-tree-sha1 = "3fe6bf926e57cc4be598151cd40832221de2e894"
+os = "macos"
+
+    [[libvorbis.download]]
+    sha256 = "23a5711a3fa354caa7dd614b426a2d8115e6ecce0c15278b70d05808bae30565"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.aarch64-apple-darwin.tar.gz"
+[[libvorbis]]
+arch = "aarch64"
+git-tree-sha1 = "160b4067af8972ee176d1bbc26e07a0fa1c2c698"
+libc = "glibc"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "8687a956248ec121d8733e17a0c1cec9da5fe2a20315e85fdf340e6436a0896c"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.aarch64-linux-gnu.tar.gz"
+[[libvorbis]]
+arch = "aarch64"
+git-tree-sha1 = "1f5860553dfc87985032d2921a5d3bf69ea71fbb"
+libc = "musl"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "8db2608ead24702f9b6b663a551aa98685356be5f211e840fd8a8c33fc04c926"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.aarch64-linux-musl.tar.gz"
+[[libvorbis]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "8ac4c71c6076fb1b0d1fb3889e681648a9936de1"
+libc = "glibc"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "e6cc1c60a26e6fa6cf2dbbaa2cf87edaa6b5d2d1c05a51abf9aca87a414af4e7"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.armv6l-linux-gnueabihf.tar.gz"
+[[libvorbis]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "79c588c5efda4651d20c40fd6f99d65ab4c77c8e"
+libc = "musl"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "f693cee4807d39cd3d8acf99dd66a327dcf1802d4fadb78b7d88f2ed17249d68"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.armv6l-linux-musleabihf.tar.gz"
+[[libvorbis]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "ac4bb64cdb80aeb71e36a6b4b71bae42e18cf127"
+libc = "glibc"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "5fc121f49efb1de9bca8c4821ede982654a1e0d66d1199efc5bb4cbd28281626"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.armv7l-linux-gnueabihf.tar.gz"
+[[libvorbis]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "54b8604eb7013be64840a49ce4c48fecfa497714"
+libc = "musl"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "981634767b8f9a7a547f170cb29f54f8f314320c3bd6b5567bac35adf2e9c5ee"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.armv7l-linux-musleabihf.tar.gz"
+[[libvorbis]]
+arch = "i686"
+git-tree-sha1 = "09da5a3793a1578b1d793c30b62a527e79ebcd3a"
+libc = "glibc"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "b7a1bbdbad2dcdc0a5aa918eb0efb784a838b150137e029614c88c3529befa49"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.i686-linux-gnu.tar.gz"
+[[libvorbis]]
+arch = "i686"
+git-tree-sha1 = "0162340b08f77b38e9f2df2c42bc9cfb7de6fafc"
+libc = "musl"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "67727d80aa2fcb464c0c2bcc63221787a7e50ad4a977735a0cf69f480a76cbe1"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.i686-linux-musl.tar.gz"
+[[libvorbis]]
+arch = "i686"
+git-tree-sha1 = "3ead487789c19c9ab4957c6e628c551c412254cf"
+os = "windows"
+
+    [[libvorbis.download]]
+    sha256 = "82f514cf9bbde0e74686a45f46fa032eee49d10ffe5456734ba89d9bb71aa96d"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.i686-w64-mingw32.tar.gz"
+[[libvorbis]]
+arch = "powerpc64le"
+git-tree-sha1 = "9d28055c88226509a006509e881b05d572bd3de2"
+libc = "glibc"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "2ef4b09c8a525d5491a82fd86343810f4f2d050384124421aad32f2863c337e5"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.powerpc64le-linux-gnu.tar.gz"
+[[libvorbis]]
+arch = "x86_64"
+git-tree-sha1 = "572714f8bb8cb23efde4bcd230b638bc3cd7ef00"
+os = "macos"
+
+    [[libvorbis.download]]
+    sha256 = "72c5e7226d9eb38b34ad6364fddfc6fe1948e8e3121e525234871ac6638df1cb"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.x86_64-apple-darwin.tar.gz"
+[[libvorbis]]
+arch = "x86_64"
+git-tree-sha1 = "89ed5dda220da4354ada1970107e13679914bbbc"
+libc = "glibc"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "d314fdcb60bfeefdcdfd949f39ded6c75721f56f46aa83d66af019083e695066"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.x86_64-linux-gnu.tar.gz"
+[[libvorbis]]
+arch = "x86_64"
+git-tree-sha1 = "dba67f3f3799c2c3d7938b2d74fe5df5dc016481"
+libc = "musl"
+os = "linux"
+
+    [[libvorbis.download]]
+    sha256 = "0db462b2708c6fc16a3cc428a95303702429e341e0777d075431bb0934109d50"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.x86_64-linux-musl.tar.gz"
+[[libvorbis]]
+arch = "x86_64"
+git-tree-sha1 = "ae72e7d97347f429419c8ba05b64c40b8703866b"
+os = "freebsd"
+
+    [[libvorbis.download]]
+    sha256 = "7c09dbeed46e9c77f425cff2ebab0ef50577cb94084bff50ce7ac1931a7c0953"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.x86_64-unknown-freebsd.tar.gz"
+[[libvorbis]]
+arch = "x86_64"
+git-tree-sha1 = "0c393ed4faa8cdf04f992ff605abaed1c1172f69"
+os = "windows"
+
+    [[libvorbis.download]]
+    sha256 = "b293b3b524db07c6a7f8f9499593484be8344eaa3637ad2294789c8236ebeff8"
+    url = "https://github.com/JuliaBinaryWrappers/libvorbis_jll.jl/releases/download/libvorbis-v1.3.7+1/libvorbis.v1.3.7.x86_64-w64-mingw32.tar.gz"

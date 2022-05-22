@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --replace-needed libMagickCore-6.Q16.so.6 libMagickCore-6.Q16.so.6 bin/conjure`

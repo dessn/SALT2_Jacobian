@@ -1,8 +1,10 @@
-Main.SALT2_Jacobian | [Info] Logging to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/Systematic/log.txt
+OLUtils | [Info] Logging to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/Systematic/log.txt
+Main.SALT2_Jacobian | [Info] Running with 8 threads
 Main.SALT2_Jacobian | [Info] Generating Jacobian
 Main.SALT2_Jacobian | [Info] Training jacobian from /home/patricka/.julia/dev/SALT2_Jacobian/Examples/TrainedSurfaces/OUTPUT_TRAIN_T21_suite
 Main.SALT2_Jacobian | [Info] Saving to /home/patricka/.julia/dev/SALT2_Jacobian/Examples/Outputs/Systematic/jacobian.fits
 Main.SALT2_Jacobian | [Info] Approximating Surfaces
+Main.SALT2_Jacobian.Train | [Info] Training trainopt 1
 Main.SALT2_Jacobian | [Info] Comparing surfaces
 Main.SALT2_Jacobian | [Info] Comparison:
 ┌───────────────────────────────┬───────────────────────────┬───────────┬──────────┬────────────┐
@@ -21,5 +23,9 @@ Main.SALT2_Jacobian | [Info] Comparison:
 │                   TRAINOPT001 │               TRAINOPT001 │  0.161075 │ 0.245121 │    1.29393 │
 └───────────────────────────────┴───────────────────────────┴───────────┴──────────┴────────────┘
 
-Main.SALT2_Jacobian | [Info] Plotting surfaces
-Main.SALT2_Jacobian | [Info] Plotting residuals
+Main.SALT2_Jacobian | [Info] Plotting surfaces for phase 0.0
+Main.SALT2_Jacobian | [Info] Plotting residuals for phase 0.0
+Main.SALT2_Jacobian | [Info] Plotting surfaces for phase -15.0
+Main.SALT2_Jacobian | [Info] Plotting residuals for phase -15.0
+Main.SALT2_Jacobian | [Info] Plotting surfaces for phase 45.0
+Main.SALT2_Jacobian | [Info] Plotting residuals for phase 45.0

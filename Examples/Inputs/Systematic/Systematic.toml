@@ -14,5 +14,14 @@ trainopts = "MAGSHIFT CSP B 0.01 MAGSHIFT CSP V 0.01 MAGSHIFT CSP g 0.01 MAGSHIF
 comparison_path = "TrainedSurfaces/Systematic/OUTPUT_TRAIN"
 comparison_name = "SALT2 Trained Surfaces"
 
-[ plot ]
+[[ plot ]]
 comparison_plot_path = "TrainedSurfaces/Systematic/OUTPUT_TRAIN"
+phase = 0.0
+
+[[ plot ]]
+comparison_plot_path = "TrainedSurfaces/Systematic/OUTPUT_TRAIN"
+phase = -15.0
+
+[[ plot ]]
+comparison_plot_path = "TrainedSurfaces/Systematic/OUTPUT_TRAIN"
+phase = 45.0

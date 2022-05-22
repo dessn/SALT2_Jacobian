@@ -1,0 +1,14 @@
+prefix=/workspace/destdir
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/ImageMagick-6
+includearchdir=/workspace/destdir/include/ImageMagick-6
+libname=Magick++-6.Q16
+ 
+Name: Magick++
+Description: Magick++ - C++ API for ImageMagick (ABI Q16)
+Version: 6.9.10
+Requires: MagickWand
+Libs: -L${libdir} -l${libname}
+Libs.private: -L${libdir} -l${libname}    -ltiff   -ljpeg   -L/workspace/destdir/lib -lpng16 -lz                          -L/workspace/destdir/lib -lz     -lm      -lm
+Cflags: -I${includearchdir} -I${includedir} -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16

@@ -131,41 +131,44 @@ function comparison_stage(toml, config)
     @info "Comparison:\n$pt"
 end
 
-function plot_stage(toml, config)
-    @info "Plotting surfaces"
-    plot_path = get(toml, "plot_path", config["output_path"])
-    if !isabspath(plot_path)
-        plot_path = joinpath(config["base_path"], plot_path)
-    end
-    plot_name = get(toml, "plot_name", "Surfaces.svg")
-    save_path = joinpath(config["output_path"], plot_name)
-    plot_surfaces = ensure_list(get(toml, "plot_surfaces", nothing))
-    if isnothing(plot_surfaces[1])
-        plot_surfaces = [f for f in readdir(plot_path, join=true) if !isnothing(match(r".*TRAINOPT.*\.tar\.gz", f))]
-    else
-        plot_surfaces = [joinpath(plot_path, p) for p in plot_surfaces]
-    end
-    plot_surfaces = [Surface(splitpath(p)[end], "", p) for p in plot_surfaces]
-    fig, gax = plot_surface(plot_surfaces)
-    save_plot(save_path, fig)
-    if "comparison_plot_path" in keys(toml)
-        @info "Plotting residuals"
-        comparison_plot_path = toml["comparison_plot_path"]
-        if !isabspath(comparison_plot_path)
-            comparison_plot_path = joinpath(config["base_path"], comparison_plot_path)
+function plot_stage(plot_toml, config)
+    for toml in plot_toml
+        phase = get(toml, "phase", 0.0)
+        @info "Plotting surfaces for phase $phase"
+        plot_path = get(toml, "plot_path", config["output_path"])
+        if !isabspath(plot_path)
+            plot_path = joinpath(config["base_path"], plot_path)
         end
-        comparison_plot_name = get(toml, "comparison_plot_name", "Residuals.svg")
-        comparison_save_path = joinpath(config["output_path"], comparison_plot_name)
-        comparison_plot_surfaces = ensure_list(get(toml, "comparison_plot_surfaces", nothing))
-        if isnothing(comparison_plot_surfaces[1])
-            comparison_plot_surfaces = [f for f in readdir(comparison_plot_path, join=true) if !isnothing(match(r".*TRAINOPT.*\.tar\.gz", f))]
+        plot_name = get(toml, "plot_name", "Surfaces_$(replace(string(phase), "."=>"_")).svg")
+        save_path = joinpath(config["output_path"], plot_name)
+        plot_surfaces = ensure_list(get(toml, "plot_surfaces", nothing))
+        if isnothing(plot_surfaces[1])
+            plot_surfaces = [f for f in readdir(plot_path, join=true) if !isnothing(match(r".*TRAINOPT.*\.tar\.gz", f))]
         else
-            comparison_plot_surfaces = [joinpath(comparison_plot_path, p) for p in comparison_plot_surfaces]
+            plot_surfaces = [joinpath(plot_path, p) for p in plot_surfaces]
         end
-        comparison_plot_surfaces = [Surface(splitpath(p)[end], "", p) for p in comparison_plot_surfaces]
-        strict_compare = get(toml, "strict_compare", true)
-        fig, gax = plot_comparison(plot_surfaces, comparison_plot_surfaces, strict_compare)
-        save_plot(comparison_save_path, fig)
+        plot_surfaces = [Surface(splitpath(p)[end], "", p) for p in plot_surfaces]
+        fig, gax = plot_surface(plot_surfaces, phase)
+        save_plot(save_path, fig)
+        if "comparison_plot_path" in keys(toml)
+            @info "Plotting residuals for phase $phase"
+            comparison_plot_path = toml["comparison_plot_path"]
+            if !isabspath(comparison_plot_path)
+                comparison_plot_path = joinpath(config["base_path"], comparison_plot_path)
+            end
+            comparison_plot_name = get(toml, "comparison_plot_name", "Residuals_$(replace(string(phase), "."=>"_")).svg")
+            comparison_save_path = joinpath(config["output_path"], comparison_plot_name)
+            comparison_plot_surfaces = ensure_list(get(toml, "comparison_plot_surfaces", nothing))
+            if isnothing(comparison_plot_surfaces[1])
+                comparison_plot_surfaces = [f for f in readdir(comparison_plot_path, join=true) if !isnothing(match(r".*TRAINOPT.*\.tar\.gz", f))]
+            else
+                comparison_plot_surfaces = [joinpath(comparison_plot_path, p) for p in comparison_plot_surfaces]
+            end
+            comparison_plot_surfaces = [Surface(splitpath(p)[end], "", p) for p in comparison_plot_surfaces]
+            strict_compare = get(toml, "strict_compare", true)
+            fig, gax = plot_comparison(plot_surfaces, comparison_plot_surfaces, strict_compare, phase)
+            save_plot(comparison_save_path, fig)
+        end
     end
 end
 

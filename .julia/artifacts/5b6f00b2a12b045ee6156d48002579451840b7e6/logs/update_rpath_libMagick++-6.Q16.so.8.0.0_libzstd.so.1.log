@@ -1,0 +1,1 @@
+`/usr/bin/patchelf --set-rpath '/workspace/destdir/lib:/opt/x86_64-linux-gnu/bin/../lib/gcc/x86_64-linux-gnu/5.2.0/../../../../x86_64-linux-gnu/lib/../lib64:$ORIGIN' lib/libMagick++-6.Q16.so.8.0.0`
