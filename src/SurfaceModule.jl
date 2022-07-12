@@ -82,7 +82,7 @@ end
 function Surface(name, trainopt, surface_path::AbstractString)
     surface_path = uncompress(surface_path)
 
-    colour_law_path = joinpath(surface_path, "salt2_color_correction.dat.gz")
+    colour_law_path = joinpath(surface_path, "salt2_color_correction_final.dat.gz")
     raw_colour_law = open(GzipDecompressorStream, colour_law_path) do io
         return readlines(io)
     end
